@@ -1,5 +1,5 @@
 import React from 'react'
-import { formatDate, formatTime } from '../utils'
+import { formatDate, formatTime } from 'utils/calendar'
 
 const Schedules = ({ scheduledMatches }) => (
   <>

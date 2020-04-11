@@ -16,6 +16,7 @@ const Team = ({ divisionSlug, teamSlug }) => {
 
   const {
     team: {
+      id: teamId,
       name: teamName,
       record,
       division: { name: divisionName, standings },
@@ -50,7 +51,11 @@ const Team = ({ divisionSlug, teamSlug }) => {
       </ul>
       <Router>
         <Schedules path="schedules" scheduledMatches={scheduledMatches} />
-        <Scores path="scores" completedMatches={completedMatches} />
+        <Scores
+          path="scores"
+          completedMatches={completedMatches}
+          teamId={teamId}
+        />
         <Standings path="standings" standings={standings} />
       </Router>
     </>

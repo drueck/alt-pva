@@ -1,10 +1,33 @@
 import React from 'react'
-import { formatDate, formatTime } from '../utils'
+import { formatDate, formatTime } from 'utils/calendar'
+import {
+  opponentNameFromPerspective,
+  formatScoreFromPerspective,
+  matchResultFromPerspective,
+  matchPointsFromPerspective,
+} from 'utils/scores'
 
-const formatScore = ({ homeTeamScore, visitingTeamScore }) =>
-  homeTeamScore === undefined ? '' : `${homeTeamScore} - ${visitingTeamScore}`
+const CompletedMatch = ({ match, teamId }) => {
+  const { id, date, time, homeTeam, visitingTeam, setResults } = match
+  const perspective = homeTeam.id === teamId ? 'home' : 'visitor'
 
-const Scores = ({ completedMatches }) => (
+  return (
+    <tr key={id}>
+      <td>{formatDate(date)}</td>
+      <td>{formatTime(time)}</td>
+      <td>
+        {opponentNameFromPerspective(homeTeam, visitingTeam, perspective)}
+      </td>
+      <td>{formatScoreFromPerspective(setResults[0], perspective)}</td>
+      <td>{formatScoreFromPerspective(setResults[1], perspective)}</td>
+      <td>{formatScoreFromPerspective(setResults[2], perspective)}</td>
+      <td>{matchResultFromPerspective(setResults, perspective)}</td>
+      <td>{matchPointsFromPerspective(setResults, perspective)}</td>
+    </tr>
+  )
+}
+
+const Scores = ({ completedMatches, teamId }) => (
   <>
     <h3>Scores</h3>
     {completedMatches.length ? (
@@ -13,34 +36,18 @@ const Scores = ({ completedMatches }) => (
           <tr>
             <th>Date</th>
             <th>Time</th>
-            <th>Home</th>
-            <th>Visitor</th>
+            <th>Opponent</th>
             <th>Set 1</th>
             <th>Set 2</th>
             <th>Set 3</th>
+            <th>Result</th>
+            <th>MPs</th>
           </tr>
         </thead>
         <tbody>
-          {completedMatches.map(
-            ({
-              id,
-              date,
-              time,
-              homeTeam: { name: home },
-              visitingTeam: { name: visitor },
-              setResults,
-            }) => (
-              <tr key={id}>
-                <td>{formatDate(date)}</td>
-                <td>{formatTime(time)}</td>
-                <td>{home}</td>
-                <td>{visitor}</td>
-                <td>{formatScore(setResults[0])}</td>
-                <td>{formatScore(setResults[1])}</td>
-                <td>{formatScore(setResults[2])}</td>
-              </tr>
-            )
-          )}
+          {completedMatches.map((match) => (
+            <CompletedMatch match={match} teamId={teamId} />
+          ))}
         </tbody>
       </table>
     ) : (
