@@ -20,7 +20,7 @@ const AppTitle = styled.h1`
 
   a {
     text-decoration: none;
-    color: ${color('perrywinkle')};
+    color: ${color('mutedBlue')};
   }
 `
 

@@ -3,6 +3,7 @@ import { useQuery, gql } from '@apollo/client'
 import { Link } from '@reach/router'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
+import SubHeading from 'components/SubHeading'
 
 const DIVISIONS_QUERY = gql`
   {
@@ -12,12 +13,6 @@ const DIVISIONS_QUERY = gql`
       slug
     }
   }
-`
-
-const SubHeading = styled.h2`
-  color: ${color('mutedBlue')};
-  margin: 10px 0;
-  padding-left: 20px;
 `
 
 const DivisionCard = ({ division: { id, name, slug }, ...props }) => (
@@ -43,6 +38,7 @@ const StyledDivisionCard = styled(DivisionCard)`
     height: 100%;
     padding: 20px;
     display: block;
+    color: ${color('mutedBlue')};
   }
 `
 
