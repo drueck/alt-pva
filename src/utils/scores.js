@@ -3,13 +3,16 @@
 // once and reused if this was transitioned to an object-oriented design
 // consider making that change, or at least organizing this file better
 
+export const formatMatchPoints = (matchPointsString) =>
+  Number.parseFloat(matchPointsString).toFixed(1)
+
 export const formatScoreFromPerspective = (setResult, perspective) => {
   if (setResult.homeTeamScore === undefined) return ''
 
   const teamScore = teamScoreFromPerspective(setResult, perspective)
   const opponentScore = opponentScoreFromPerspective(setResult, perspective)
 
-  return `${teamScore} - ${opponentScore}`
+  return `${teamScore}-${opponentScore}`
 }
 
 const teamScoreKey = (perspective) =>

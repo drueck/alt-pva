@@ -5,6 +5,7 @@ import {
   formatScoreFromPerspective,
   matchResultFromPerspective,
   matchPointsFromPerspective,
+  formatMatchPoints,
 } from 'utils/scores'
 
 const CompletedMatch = ({ match, teamId }) => {
@@ -22,7 +23,9 @@ const CompletedMatch = ({ match, teamId }) => {
       <td>{formatScoreFromPerspective(setResults[1], perspective)}</td>
       <td>{formatScoreFromPerspective(setResults[2], perspective)}</td>
       <td>{matchResultFromPerspective(setResults, perspective)}</td>
-      <td>{matchPointsFromPerspective(setResults, perspective)}</td>
+      <td>
+        {formatMatchPoints(matchPointsFromPerspective(setResults, perspective))}
+      </td>
     </tr>
   )
 }
