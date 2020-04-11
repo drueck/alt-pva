@@ -39,7 +39,7 @@ describe('formatScoreFromPerspective', () => {
         visitingTeamScore: 20,
       }
 
-      expect(formatScoreFromPerspective(setResult, 'home')).toEqual('25 - 20')
+      expect(formatScoreFromPerspective(setResult, 'home')).toEqual('25-20')
     })
   })
 
@@ -50,9 +50,7 @@ describe('formatScoreFromPerspective', () => {
         visitingTeamScore: 20,
       }
 
-      expect(formatScoreFromPerspective(setResult, 'visitor')).toEqual(
-        '20 - 25'
-      )
+      expect(formatScoreFromPerspective(setResult, 'visitor')).toEqual('20-25')
     })
   })
 })
