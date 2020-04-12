@@ -10,15 +10,15 @@ import NavList from 'components/NavList'
 import NavListLink from 'components/NavListLink'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
-
-const Text = styled.p`
-  font-size: 14px;
-  margin: 10px 20px;
-`
+import Text from 'components/Text'
 
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: ${color('mutedBlue')};
+`
+
+const StyledNavList = styled(NavList)`
+  margin-bottom: 32px;
 `
 
 const Team = ({ divisionSlug, teamSlug }) => {
@@ -48,7 +48,7 @@ const Team = ({ divisionSlug, teamSlug }) => {
         in{' '}
         <StyledLink to={`/division/${divisionSlug}`}>{divisionName}</StyledLink>
       </Text>
-      <NavList>
+      <StyledNavList>
         <NavListLink to="schedules" replace>
           Schedules
         </NavListLink>
@@ -58,7 +58,7 @@ const Team = ({ divisionSlug, teamSlug }) => {
         <NavListLink to="standings" replace>
           Standings
         </NavListLink>
-      </NavList>
+      </StyledNavList>
       <Router>
         <Schedules
           path="schedules"
