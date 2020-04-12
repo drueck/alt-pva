@@ -13,7 +13,7 @@ const NavListLink = ({ to, replace = false, children, ...props }) => (
 
 const StyledNavListLink = styled(NavListLink)`
   list-style: none;
-  background-color: ${color('lightGrey')};
+  background-color: ${color('lighterGrey')};
   margin-bottom: 2px;
 
   a {

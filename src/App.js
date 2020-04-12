@@ -12,7 +12,7 @@ import { PrimaryHeading } from 'components/Headings'
 
 const AppHeader = styled.header`
   width: 100%;
-  background-color: ${color('lightGrey')};
+  background-color: ${color('lighterGrey')};
   text-align: center;
 `
 
