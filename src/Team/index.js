@@ -60,7 +60,12 @@ const Team = ({ divisionSlug, teamSlug }) => {
         </NavListLink>
       </NavList>
       <Router>
-        <Schedules path="schedules" scheduledMatches={scheduledMatches} />
+        <Schedules
+          path="schedules"
+          scheduledMatches={scheduledMatches}
+          teamId={teamId}
+          divisionSlug={divisionSlug}
+        />
         <Scores
           path="scores"
           completedMatches={completedMatches}
