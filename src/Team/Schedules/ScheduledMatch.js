@@ -19,7 +19,7 @@ const Container = styled.div`
     }
   }
 
-  background-color: ${color('lightGrey')};
+  background-color: ${color('lighterGrey')};
   padding: 20px;
   margin-bottom: 2px;
 `

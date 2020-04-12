@@ -13,9 +13,13 @@ const match = {
   date: '2020-04-11',
   time: '22:00:00',
   homeTeam: {
+    id: '12345',
+    slug: 'court-jesters',
     name: 'Court Jesters',
   },
   visitingTeam: {
+    id: '67890',
+    slug: 'becks-all-star-jazz-hands-review',
     name: "Becky's All Star Jazz Hands Review",
   },
   location: 'Portland Adventist Elementary School',
@@ -25,6 +29,10 @@ const match = {
 export const Default = () => (
   <ThemeProvider theme={theme}>
     <Global styles={globalStyles} />
-    <ScheduledMatch match={match} />
+    <ScheduledMatch
+      match={match}
+      teamId="12345"
+      divisionSlug="coed-a-thursday"
+    />
   </ThemeProvider>
 )
