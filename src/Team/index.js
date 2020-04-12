@@ -6,6 +6,8 @@ import Schedules from './Schedules'
 import Scores from './Scores'
 import Standings from './Standings'
 
+
+
 const Team = ({ divisionSlug, teamSlug }) => {
   const { loading, error, data } = useQuery(TEAM_QUERY, {
     variables: { divisionSlug, teamSlug },

@@ -1,57 +1,9 @@
 import React from 'react'
-import { useQuery, gql } from '@apollo/client'
-import { Link } from '@reach/router'
+import { useQuery } from '@apollo/client'
+import DIVISION_QUERY from './Division.query'
 import SubHeading from 'components/SubHeading'
-import styled from '@emotion/styled'
-import { color } from 'utils/style'
-
-const DIVISION_QUERY = gql`
-  query DivisionQuery($slug: String!) {
-    division(slug: $slug) {
-      id
-      name
-      slug
-      teams {
-        id
-        name
-        slug
-      }
-    }
-  }
-`
-
-const TeamCard = ({
-  team: { name, slug: teamSlug },
-  divisionSlug,
-  ...props
-}) => (
-  <li {...props}>
-    <Link to={`/division/${divisionSlug}/team/${teamSlug}/schedules`}>
-      {name}
-    </Link>
-  </li>
-)
-
-const StyledTeamCard = styled(TeamCard)`
-  list-style: none;
-  background-color: ${color('lightGrey')};
-  margin-bottom: 2px;
-
-  a {
-    text-decoration: none;
-    color: black;
-    height: 100%;
-    padding: 20px;
-    display: block;
-    color: ${color('mutedBlue')};
-  }
-`
-
-const StyledList = styled.ul`
-  padding: 0;
-  list-style: none;
-  width: 100%;
-`
+import NavList from 'components/NavList'
+import NavListLink from 'components/NavListLink'
 
 const Division = ({ slug }) => {
   const { loading, error, data } = useQuery(DIVISION_QUERY, {
@@ -68,15 +20,16 @@ const Division = ({ slug }) => {
   return (
     <>
       <SubHeading>{divisionName}</SubHeading>
-      <StyledList>
-        {teams.map((team) => (
-          <StyledTeamCard
-            key={team.id}
-            team={team}
-            divisionSlug={divisionSlug}
-          />
+      <NavList>
+        {teams.map(({ id, name, slug }) => (
+          <NavListLink
+            key={id}
+            to={`/division/${divisionSlug}/team/${slug}/schedules`}
+          >
+            {name}
+          </NavListLink>
         ))}
-      </StyledList>
+      </NavList>
     </>
   )
 }
