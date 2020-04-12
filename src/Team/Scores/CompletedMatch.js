@@ -6,6 +6,7 @@ import { Link } from '@reach/router'
 import { css } from '@emotion/core'
 import {
   formatScoreFromPerspective,
+  setResultFromPerspective,
   matchResultFromPerspective,
   matchPointsFromPerspective,
 } from 'utils/scores'
@@ -40,12 +41,18 @@ const Opponent = styled.div`
   grid-area: opponent;
 `
 
-const accentColorNameForMatchResult = (result) =>
+const accentColorNameForResult = (result) =>
   result === 'Win' ? 'darkGreen' : result === 'Loss' ? 'darkPink' : 'mutedBlue'
+
+const ifWin = ({ result }) =>
+  result === 'Win' &&
+  css`
+    text-decoration: underline;
+  `
 
 const resultStyles = ({ result, theme }) =>
   css`
-    color: ${color(accentColorNameForMatchResult(result), { theme })};
+    color: ${color(accentColorNameForResult(result), { theme })};
   `
 
 const MatchResults = styled.div`
@@ -60,7 +67,7 @@ const MatchResults = styled.div`
 
 const SetResultsContainer = styled.div`
   display: flex;
-  margin: 10px 0;
+  margin: 10px 0 15px;
 
   @media (min-width: ${breakpoint}) {
     margin: 0;
@@ -85,12 +92,15 @@ const Result = styled.span`
   min-width: 50px;
   padding: 5px;
   text-align: center;
+  border: 1px solid currentColor;
 `
 
-const SetResult = ({ setResult, perspective }) => (
+const SetResult = ({ setResult, perspective, result }) => (
   <SetResultContainer>
     <SetLabel>Set {setResult.setNumber}</SetLabel>
-    <SetScores>{formatScoreFromPerspective(setResult, perspective)}</SetScores>
+    <SetScores result={result}>
+      {formatScoreFromPerspective(setResult, perspective)}
+    </SetScores>
   </SetResultContainer>
 )
 
@@ -98,7 +108,10 @@ const SetLabel = styled.div`
   font-weight: bold;
 `
 
-const SetScores = styled.div``
+const SetScores = styled.div`
+  ${resultStyles};
+  ${ifWin};
+`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -128,6 +141,7 @@ const CompletedMatch = ({ match, teamId, divisionSlug }) => {
         {setResults.map((setResult) => (
           <SetResult
             key={setResult.setNumber}
+            result={setResultFromPerspective(setResult, perspective)}
             setResult={setResult}
             perspective={perspective}
           />
