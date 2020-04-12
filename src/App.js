@@ -5,8 +5,9 @@ import DivisionsList from './DivisionsList'
 import Division from './Division'
 import Team from './Team'
 import styled from '@emotion/styled'
+import { Global } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
-import { theme, color } from 'utils/style'
+import { theme, globalStyles, color } from 'utils/style'
 
 const AppHeader = styled.header`
   width: 100%;
@@ -33,6 +34,7 @@ const Main = styled.main`
 const App = ({ client }) => (
   <ApolloProvider client={client}>
     <ThemeProvider theme={theme}>
+      <Global styles={globalStyles} />
       <AppHeader>
         <AppTitle>
           <Link to="/">alt-pva</Link>

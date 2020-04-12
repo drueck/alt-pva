@@ -1,3 +1,5 @@
+import { css } from '@emotion/core'
+
 export const theme = {
   colors: {
     lightGrey: '#d8dcd6',
@@ -7,3 +9,10 @@ export const theme = {
 }
 
 export const color = (colorName) => (props) => props.theme.colors[colorName]
+
+export const globalStyles = css`
+  body {
+    margin: 0;
+    font-family: Courier New, monospace;
+  }
+`
