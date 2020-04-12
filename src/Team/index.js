@@ -5,7 +5,7 @@ import { Router, Link } from '@reach/router'
 import Schedules from './Schedules'
 import Scores from './Scores'
 import Standings from './Standings'
-import SubHeading from 'components/SubHeading'
+import { SecondaryHeading } from 'components/Headings'
 import NavList from 'components/NavList'
 import NavListLink from 'components/NavListLink'
 import styled from '@emotion/styled'
@@ -42,7 +42,7 @@ const Team = ({ divisionSlug, teamSlug }) => {
 
   return (
     <>
-      <SubHeading>{teamName}</SubHeading>
+      <SecondaryHeading>{teamName}</SecondaryHeading>
       <Text>
         Currently with a record of {record.wins} wins and {record.losses} losses
         in{' '}

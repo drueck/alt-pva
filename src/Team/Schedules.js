@@ -1,9 +1,11 @@
 import React from 'react'
 import { formatDate, formatTime } from 'utils/calendar'
+import { TertiaryHeading } from 'components/Headings'
+import Text from 'components/Text'
 
 const Schedules = ({ scheduledMatches }) => (
   <>
-    <h3>Schedules</h3>
+    <TertiaryHeading>Schedules</TertiaryHeading>
     {scheduledMatches.length ? (
       <table>
         <thead>
@@ -40,7 +42,7 @@ const Schedules = ({ scheduledMatches }) => (
         </tbody>
       </table>
     ) : (
-      <p>There are currently no scheduled matches for this team.</p>
+      <Text>There are currently no scheduled matches for this team.</Text>
     )}
   </>
 )

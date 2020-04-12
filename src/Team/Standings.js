@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import { TertiaryHeading } from 'components/Headings'
+import Text from 'components/Text'
 
 const formatPercentage = (percentageString) =>
   Number.parseFloat(percentageString).toFixed(2)
@@ -42,7 +44,7 @@ const StyledStandingRow = styled.tr`
 
 const Standings = ({ standings }) => (
   <>
-    <h3>Standings</h3>
+    <TertiaryHeading>Standings</TertiaryHeading>
     {standings.length ? (
       <table>
         <thead>
@@ -62,7 +64,7 @@ const Standings = ({ standings }) => (
         </tbody>
       </table>
     ) : (
-      <p>There are currently no standings for this team's division.</p>
+      <Text>There are currently no standings for this team's division.</Text>
     )}
   </>
 )

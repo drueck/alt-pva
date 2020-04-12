@@ -7,6 +7,8 @@ import {
   matchPointsFromPerspective,
   formatMatchPoints,
 } from 'utils/scores'
+import { TertiaryHeading } from 'components/Headings'
+import Text from 'components/Text'
 
 const CompletedMatch = ({ match, teamId }) => {
   const { date, time, homeTeam, visitingTeam, setResults } = match
@@ -32,7 +34,7 @@ const CompletedMatch = ({ match, teamId }) => {
 
 const Scores = ({ completedMatches, teamId }) => (
   <>
-    <h3>Scores</h3>
+    <TertiaryHeading>Scores</TertiaryHeading>
     {completedMatches.length ? (
       <table>
         <thead>
@@ -54,7 +56,7 @@ const Scores = ({ completedMatches, teamId }) => (
         </tbody>
       </table>
     ) : (
-      <p>There are currently no completed matches for this team.</p>
+      <Text>There are currently no completed matches for this team.</Text>
     )}
   </>
 )

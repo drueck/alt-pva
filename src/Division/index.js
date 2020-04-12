@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
 import DIVISION_QUERY from './Division.query'
-import SubHeading from 'components/SubHeading'
+import { SecondaryHeading } from 'components/Headings'
 import NavList from 'components/NavList'
 import NavListLink from 'components/NavListLink'
 
@@ -19,7 +19,7 @@ const Division = ({ slug }) => {
 
   return (
     <>
-      <SubHeading>{divisionName}</SubHeading>
+      <SecondaryHeading>{divisionName}</SecondaryHeading>
       <NavList>
         {teams.map(({ id, name, slug }) => (
           <NavListLink
