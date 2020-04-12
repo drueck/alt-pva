@@ -60,8 +60,8 @@ describe('setResultFromPerspective', () => {
     it("returns 'win' from 'home' perspective, 'loss' from 'visitor'", () => {
       const setResult = { homeTeamScore: 25, visitingTeamScore: 20 }
 
-      expect(setResultFromPerspective(setResult, 'home')).toEqual('win')
-      expect(setResultFromPerspective(setResult, 'visitor')).toEqual('loss')
+      expect(setResultFromPerspective(setResult, 'home')).toEqual('Win')
+      expect(setResultFromPerspective(setResult, 'visitor')).toEqual('Loss')
     })
   })
 
@@ -69,8 +69,8 @@ describe('setResultFromPerspective', () => {
     it("returns 'loss' from 'home' perspective, 'win' from 'visitor'", () => {
       const setResult = { homeTeamScore: 20, visitingTeamScore: 25 }
 
-      expect(setResultFromPerspective(setResult, 'home')).toEqual('loss')
-      expect(setResultFromPerspective(setResult, 'visitor')).toEqual('win')
+      expect(setResultFromPerspective(setResult, 'home')).toEqual('Loss')
+      expect(setResultFromPerspective(setResult, 'visitor')).toEqual('Win')
     })
   })
 
@@ -78,8 +78,8 @@ describe('setResultFromPerspective', () => {
     it("returns 'tie'", () => {
       const setResult = { homeTeamScore: 25, visitingTeamScore: 25 }
 
-      expect(setResultFromPerspective(setResult, 'home')).toEqual('tie')
-      expect(setResultFromPerspective(setResult, 'visitor')).toEqual('tie')
+      expect(setResultFromPerspective(setResult, 'home')).toEqual('Tie')
+      expect(setResultFromPerspective(setResult, 'visitor')).toEqual('Tie')
     })
   })
 })
@@ -123,48 +123,48 @@ describe('pointDifferentialFromPerspective', () => {
 
 describe('matchResultFromPerspective', () => {
   describe('when the perspective is home and the home team won more sets', () => {
-    it('returns W', () => {
+    it('returns Win', () => {
       const setResults = [
         { homeTeamScore: 25, visitingTeamScore: 20 },
         { homeTeamScore: 25, visitingTeamScore: 20 },
         { homeTeamScore: 8, visitingTeamScore: 15 },
       ]
 
-      expect(matchResultFromPerspective(setResults, 'home')).toEqual('W')
+      expect(matchResultFromPerspective(setResults, 'home')).toEqual('Win')
     })
   })
 
   describe('when the perspective is home and the home team lost more sets', () => {
-    it('returns L', () => {
+    it('returns Loss', () => {
       const setResults = [
         { homeTeamScore: 20, visitingTeamScore: 25 },
         { homeTeamScore: 25, visitingTeamScore: 20 },
         { homeTeamScore: 8, visitingTeamScore: 15 },
       ]
 
-      expect(matchResultFromPerspective(setResults, 'home')).toEqual('L')
+      expect(matchResultFromPerspective(setResults, 'home')).toEqual('Loss')
     })
   })
 
   describe('when the perspective is home and the home team won by points', () => {
-    it('returns W', () => {
+    it('returns Win', () => {
       const setResults = [
         { homeTeamScore: 25, visitingTeamScore: 20 },
         { homeTeamScore: 22, visitingTeamScore: 25 },
       ]
 
-      expect(matchResultFromPerspective(setResults, 'home')).toEqual('W')
+      expect(matchResultFromPerspective(setResults, 'home')).toEqual('Win')
     })
   })
 
   describe('if the teams tied by sets and points', () => {
-    it('returns T', () => {
+    it('returns Tie', () => {
       const setResults = [
         { homeTeamScore: 25, visitingTeamScore: 25 },
         { homeTeamScore: 25, visitingTeamScore: 25 },
       ]
 
-      expect(matchResultFromPerspective(setResults, 'home')).toEqual('T')
+      expect(matchResultFromPerspective(setResults, 'home')).toEqual('Tie')
     })
   })
 })
