@@ -12,7 +12,7 @@ const Scores = ({ completedMatches, teamId, divisionSlug }) => (
           key={match.id}
           match={match}
           teamId={teamId}
-          divisionSlug="divisionSlug"
+          divisionSlug={divisionSlug}
         />
       ))
     ) : (
