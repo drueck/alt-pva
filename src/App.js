@@ -8,6 +8,7 @@ import styled from '@emotion/styled'
 import { Global } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
 import { theme, globalStyles, color } from 'utils/style'
+import { PrimaryHeading } from 'components/Headings'
 
 const AppHeader = styled.header`
   width: 100%;
@@ -15,20 +16,10 @@ const AppHeader = styled.header`
   text-align: center;
 `
 
-const AppTitle = styled.h1`
-  margin: 0;
-  padding: 10px;
-
-  a {
-    text-decoration: none;
-    color: ${color('mutedBlue')};
-  }
-`
-
 const Main = styled.main`
   padding: 10px 0 0 0;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto 50px;
 `
 
 const App = ({ client }) => (
@@ -36,9 +27,9 @@ const App = ({ client }) => (
     <ThemeProvider theme={theme}>
       <Global styles={globalStyles} />
       <AppHeader>
-        <AppTitle>
+        <PrimaryHeading>
           <Link to="/">alt-pva</Link>
-        </AppTitle>
+        </PrimaryHeading>
       </AppHeader>
       <Main>
         <Router>
