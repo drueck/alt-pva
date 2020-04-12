@@ -12,7 +12,8 @@ import styled from '@emotion/styled'
 import { color } from 'utils/style'
 
 const Text = styled.p`
-  margin: 20px;
+  font-size: 14px;
+  margin: 10px 20px;
 `
 
 const StyledLink = styled(Link)`
