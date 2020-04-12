@@ -8,7 +8,6 @@ import {
   formatScoreFromPerspective,
   matchResultFromPerspective,
   matchPointsFromPerspective,
-  formatMatchPoints,
 } from 'utils/scores'
 
 const breakpoint = '615px'
@@ -79,6 +78,15 @@ const SetResultContainer = styled.div`
   }
 `
 
+const Result = styled.span`
+  background-color: white;
+  display: inline-block;
+  font-weight: bold;
+  min-width: 50px;
+  padding: 5px;
+  text-align: center;
+`
+
 const SetResult = ({ setResult, perspective }) => (
   <SetResultContainer>
     <SetLabel>Set {setResult.setNumber}</SetLabel>
@@ -126,8 +134,8 @@ const CompletedMatch = ({ match, teamId, divisionSlug }) => {
         ))}
       </SetResultsContainer>
       <MatchResults result={result}>
-        {result} with {matchPointsFromPerspective(setResults, perspective)}{' '}
-        match points
+        <Result>{result}</Result> with{' '}
+        {matchPointsFromPerspective(setResults, perspective)} match points
       </MatchResults>
     </Container>
   )
