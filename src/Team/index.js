@@ -5,8 +5,20 @@ import { Router, Link } from '@reach/router'
 import Schedules from './Schedules'
 import Scores from './Scores'
 import Standings from './Standings'
+import SubHeading from 'components/SubHeading'
+import NavList from 'components/NavList'
+import NavListLink from 'components/NavListLink'
+import styled from '@emotion/styled'
+import { color } from 'utils/style'
 
+const Text = styled.p`
+  margin: 20px;
+`
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: ${color('mutedBlue')};
+`
 
 const Team = ({ divisionSlug, teamSlug }) => {
   const { loading, error, data } = useQuery(TEAM_QUERY, {
@@ -29,28 +41,23 @@ const Team = ({ divisionSlug, teamSlug }) => {
 
   return (
     <>
-      <h2>{teamName}</h2>
-      <p>
+      <SubHeading>{teamName}</SubHeading>
+      <Text>
         Currently with a record of {record.wins} wins and {record.losses} losses
-        in <Link to={`/division/${divisionSlug}`}>{divisionName}</Link>
-      </p>
-      <ul>
-        <li>
-          <Link to="schedules" replace>
-            Schedules
-          </Link>
-        </li>
-        <li>
-          <Link to="scores" replace>
-            Scores
-          </Link>
-        </li>
-        <li>
-          <Link to="standings" replace>
-            Standings
-          </Link>
-        </li>
-      </ul>
+        in{' '}
+        <StyledLink to={`/division/${divisionSlug}`}>{divisionName}</StyledLink>
+      </Text>
+      <NavList>
+        <NavListLink to="schedules" replace>
+          Schedules
+        </NavListLink>
+        <NavListLink to="scores" replace>
+          Scores
+        </NavListLink>
+        <NavListLink to="standings" replace>
+          Standings
+        </NavListLink>
+      </NavList>
       <Router>
         <Schedules path="schedules" scheduledMatches={scheduledMatches} />
         <Scores
