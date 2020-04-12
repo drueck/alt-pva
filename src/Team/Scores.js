@@ -9,11 +9,11 @@ import {
 } from 'utils/scores'
 
 const CompletedMatch = ({ match, teamId }) => {
-  const { id, date, time, homeTeam, visitingTeam, setResults } = match
+  const { date, time, homeTeam, visitingTeam, setResults } = match
   const perspective = homeTeam.id === teamId ? 'home' : 'visitor'
 
   return (
-    <tr key={id}>
+    <tr>
       <td>{formatDate(date)}</td>
       <td>{formatTime(time)}</td>
       <td>
@@ -49,7 +49,7 @@ const Scores = ({ completedMatches, teamId }) => (
         </thead>
         <tbody>
           {completedMatches.map((match) => (
-            <CompletedMatch match={match} teamId={teamId} />
+            <CompletedMatch key={match.id} match={match} teamId={teamId} />
           ))}
         </tbody>
       </table>
