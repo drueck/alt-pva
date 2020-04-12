@@ -3,9 +3,11 @@ import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import { Link } from '@reach/router'
 
-const NavListLink = ({ to, children, ...props }) => (
+const NavListLink = ({ to, replace = false, children, ...props }) => (
   <li {...props}>
-    <Link to={to}>{children}</Link>
+    <Link to={to} replace={replace}>
+      {children}
+    </Link>
   </li>
 )
 
