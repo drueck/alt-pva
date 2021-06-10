@@ -40,12 +40,15 @@ const Team = ({ divisionSlug, teamSlug }) => {
     },
   } = data
 
+  const winsText = record.wins === 1 ? 'win' : 'wins'
+  const lossesText = record.wins === 1 ? 'loss' : 'losses'
+
   return (
     <>
       <SecondaryHeading>{teamName}</SecondaryHeading>
       <Text>
-        Currently with a record of {record.wins} wins and {record.losses} losses
-        in{' '}
+        Currently with a record of {record.wins} {winsText} and {record.losses}{' '}
+        {lossesText} in{' '}
         <StyledLink to={`/division/${divisionSlug}`}>{divisionName}</StyledLink>
       </Text>
       <StyledNavList>
