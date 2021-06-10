@@ -10,12 +10,14 @@ const Container = styled.div`
     'datetime'
     'opponent'
     'location'
-    'ref';
+    'ref'
+    'checkin';
 
   @media(min-width: 768px) {
     grid-template-areas:
       'datetime location'
-      'opponent ref';
+      'opponent ref'
+      'checkin checkin';
     }
   }
 
@@ -52,12 +54,23 @@ const Ref = styled.div`
   }
 `
 
+const CheckIn = styled.div`
+  grid-area: checkin;
+  padding-top: 1em;
+`
+
+const CheckInLink = styled.a`
+  text-decoration: none;
+  color: ${color('darkGreen')};
+  font-weight: bold;
+`
+
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: ${color('mutedBlue')};
 `
 
-const ScheduledMatch = ({ match, teamId, divisionSlug }) => {
+const ScheduledMatch = ({ match, teamId, divisionSlug, checkInUrl }) => {
   const { date, time, homeTeam, visitingTeam, location, ref } = match
   const opponent = homeTeam.id === teamId ? visitingTeam : homeTeam
 
@@ -75,7 +88,18 @@ const ScheduledMatch = ({ match, teamId, divisionSlug }) => {
         </StyledLink>
       </Opponent>
       <Location>{location}</Location>
-      <Ref>Ref: {ref}</Ref>
+      <Ref>Ref: {ref || 'None'}</Ref>
+      {checkInUrl && (
+        <CheckIn>
+          <CheckInLink
+            href={checkInUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Check In
+          </CheckInLink>
+        </CheckIn>
+      )}
     </Container>
   )
 }

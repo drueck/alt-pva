@@ -36,3 +36,15 @@ export const Default = () => (
     />
   </ThemeProvider>
 )
+
+export const WithCheckIn = () => (
+  <ThemeProvider theme={theme}>
+    <Global styles={globalStyles} />
+    <ScheduledMatch
+      match={match}
+      teamId="12345"
+      divisionSlug="coed-a-thursday"
+      checkInUrl="https://register.portlandvolleyball.org/checkin/facility/2/"
+    />
+  </ThemeProvider>
+)
