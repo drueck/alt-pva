@@ -70,8 +70,18 @@ const StyledLink = styled(Link)`
   color: ${color('mutedBlue')};
 `
 
+const locationAndCourt = ({ location, court }) => {
+  if (!court) {
+    return location
+  }
+
+  return court.startsWith('(')
+    ? `${location} ${court}`
+    : `${location} (${court})`
+}
+
 const ScheduledMatch = ({ match, teamId, divisionSlug, checkInUrl }) => {
-  const { date, time, homeTeam, visitingTeam, location, ref } = match
+  const { date, time, homeTeam, visitingTeam, ref } = match
   const opponent = homeTeam.id === teamId ? visitingTeam : homeTeam
 
   return (
@@ -87,7 +97,7 @@ const ScheduledMatch = ({ match, teamId, divisionSlug, checkInUrl }) => {
           {opponent.name}
         </StyledLink>
       </Opponent>
-      <Location>{location}</Location>
+      <Location>{locationAndCourt(match)}</Location>
       <Ref>Ref: {ref || 'None'}</Ref>
       {checkInUrl && (
         <CheckIn>

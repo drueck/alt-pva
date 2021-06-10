@@ -37,6 +37,28 @@ export const Default = () => (
   </ThemeProvider>
 )
 
+export const WithCourtInParens = () => (
+  <ThemeProvider theme={theme}>
+    <Global styles={globalStyles} />
+    <ScheduledMatch
+      match={{ ...match, court: '(2)' }}
+      teamId="12345"
+      divisionSlug="coed-a-thursday"
+    />
+  </ThemeProvider>
+)
+
+export const WithCourtWithoutParens = () => (
+  <ThemeProvider theme={theme}>
+    <Global styles={globalStyles} />
+    <ScheduledMatch
+      match={{ ...match, court: 'Aux Gym' }}
+      teamId="12345"
+      divisionSlug="coed-a-thursday"
+    />
+  </ThemeProvider>
+)
+
 export const WithCheckIn = () => (
   <ThemeProvider theme={theme}>
     <Global styles={globalStyles} />

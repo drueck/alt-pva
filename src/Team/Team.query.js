@@ -62,6 +62,7 @@ const TEAM_QUERY = gql`
           }
         }
         location
+        court
         ref
       }
       completedMatches {
