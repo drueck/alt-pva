@@ -83,6 +83,7 @@ const locationAndCourt = ({ location, court }) => {
 const ScheduledMatch = ({ match, teamId, divisionSlug, checkInUrl }) => {
   const { date, time, homeTeam, visitingTeam, ref } = match
   const opponent = homeTeam.id === teamId ? visitingTeam : homeTeam
+  const vsOrAt = homeTeam.id === teamId ? 'vs.' : 'at'
 
   return (
     <Container>
@@ -90,7 +91,7 @@ const ScheduledMatch = ({ match, teamId, divisionSlug, checkInUrl }) => {
         {formatDate(date)} at {formatTime(time)}
       </DateTime>
       <Opponent>
-        vs.{' '}
+        {vsOrAt}{' '}
         <StyledLink
           to={`/division/${divisionSlug}/team/${opponent.slug}/schedules`}
         >

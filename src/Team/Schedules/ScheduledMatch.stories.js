@@ -26,12 +26,23 @@ const match = {
   ref: 'Marty D.',
 }
 
-export const Default = () => (
+export const Home = () => (
   <ThemeProvider theme={theme}>
     <Global styles={globalStyles} />
     <ScheduledMatch
       match={match}
       teamId="12345"
+      divisionSlug="coed-a-thursday"
+    />
+  </ThemeProvider>
+)
+
+export const Visitor = () => (
+  <ThemeProvider theme={theme}>
+    <Global styles={globalStyles} />
+    <ScheduledMatch
+      match={match}
+      teamId="67890"
       divisionSlug="coed-a-thursday"
     />
   </ThemeProvider>
