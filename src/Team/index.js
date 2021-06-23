@@ -41,7 +41,7 @@ const Team = ({ divisionSlug, teamSlug }) => {
   } = data
 
   const winsText = record.wins === 1 ? 'win' : 'wins'
-  const lossesText = record.wins === 1 ? 'loss' : 'losses'
+  const lossesText = record.losses === 1 ? 'loss' : 'losses'
 
   return (
     <>
