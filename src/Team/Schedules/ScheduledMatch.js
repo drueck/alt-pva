@@ -83,6 +83,7 @@ const locationAndCourt = ({ location, court }) => {
 const ScheduledMatch = ({ match, teamId, divisionSlug, checkInUrl }) => {
   const { date, time, homeTeam, visitingTeam, ref } = match
   const opponent = homeTeam.id === teamId ? visitingTeam : homeTeam
+  const opponentRecord = ` (${opponent.record.wins}-${opponent.record.losses})`
   const vsOrAt = homeTeam.id === teamId ? 'vs.' : 'at'
 
   return (
@@ -97,6 +98,7 @@ const ScheduledMatch = ({ match, teamId, divisionSlug, checkInUrl }) => {
         >
           {opponent.name}
         </StyledLink>
+        {opponentRecord}
       </Opponent>
       <Location>{locationAndCourt(match)}</Location>
       <Ref>Ref: {ref || 'None'}</Ref>

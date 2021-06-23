@@ -51,6 +51,11 @@ const TEAM_QUERY = gql`
             id
             slug
           }
+          record {
+            id
+            wins
+            losses
+          }
         }
         visitingTeam {
           id
@@ -59,6 +64,11 @@ const TEAM_QUERY = gql`
           division {
             id
             slug
+          }
+          record {
+            id
+            wins
+            losses
           }
         }
         location

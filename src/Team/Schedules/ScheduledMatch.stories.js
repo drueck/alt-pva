@@ -16,11 +16,21 @@ const match = {
     id: '12345',
     slug: 'court-jesters',
     name: 'Court Jesters',
+    record: {
+      id: '98764',
+      wins: 2,
+      losses: 0,
+    },
   },
   visitingTeam: {
     id: '67890',
     slug: 'becks-all-star-jazz-hands-review',
     name: "Becky's All Star Jazz Hands Review",
+    record: {
+      id: '98765',
+      wins: 1,
+      losses: 1,
+    },
   },
   location: 'Portland Adventist Elementary School',
   ref: 'Marty D.',
