@@ -4,15 +4,15 @@ import Text from 'components/Text'
 import ScheduledMatch from './ScheduledMatch'
 import { isToday } from 'utils/calendar'
 
-const checkInUrls = {
-  'Delta Park': 'https://register.portlandvolleyball.org/checkin/facility/2/',
-  'Brentwood Park':
-    'https://register.portlandvolleyball.org/checkin/facility/3/',
+const facilityIds = {
+  'Delta Park': 2,
+  'Brentwood Park': 3,
+  'Flavel Park': 4,
 }
 
 const checkInUrl = ({ date, location }) => {
-  if (isToday(date)) {
-    return checkInUrls[location]
+  if (isToday(date) && facilityIds[location]) {
+    return `https://register.portlandvolleyball.org/checkin/facility/${facilityIds[location]}/`
   }
   return undefined
 }
