@@ -9,6 +9,7 @@ import { Global } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
 import { theme, globalStyles, color } from 'utils/style'
 import { PrimaryHeading } from 'components/Headings'
+import MaintenanceMessage from './MaintenanceMessage'
 
 const AppHeader = styled.header`
   width: 100%;
@@ -22,6 +23,8 @@ const Main = styled.main`
   margin: 0 auto 50px;
 `
 
+const maintenanceMode = true
+
 const App = ({ client }) => (
   <ApolloProvider client={client}>
     <ThemeProvider theme={theme}>
@@ -33,9 +36,15 @@ const App = ({ client }) => (
       </AppHeader>
       <Main>
         <Router>
-          <DivisionsList path="/" />
-          <Division path="/division/:slug" />
-          <Team path="/division/:divisionSlug/team/:teamSlug/*" />
+          {maintenanceMode ? (
+            <MaintenanceMessage path="/*" />
+          ) : (
+            <>
+              <DivisionsList path="/" />
+              <Division path="/division/:slug" />
+              <Team path="/division/:divisionSlug/team/:teamSlug/*" />
+            </>
+          )}
         </Router>
       </Main>
     </ThemeProvider>
