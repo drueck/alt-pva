@@ -1,13 +1,20 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
 import DIVISION_QUERY from './Division.query'
+import { useCookies } from 'react-cookie'
 import { SecondaryHeading } from 'components/Headings'
 import NavList from 'components/NavList'
 import NavListLink from 'components/NavListLink'
 
 const Division = ({ slug }) => {
+  const [cookies] = useCookies(['pva_data_jwt'])
   const { loading, error, data } = useQuery(DIVISION_QUERY, {
     variables: { slug },
+    context: {
+      headers: {
+        authorization: `Bearer ${cookies.pva_data_jwt}`,
+      },
+    },
   })
 
   if (loading) return <p>Loading...</p>
