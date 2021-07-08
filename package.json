@@ -13,6 +13,7 @@
     "emotion-theming": "^10.0.27",
     "graphql": "^15.0.0",
     "react": "^16.13.1",
+    "react-cookie": "^4.0.3",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
   },
@@ -30,7 +31,10 @@
     "bracketSpacing": true
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "overrides": {
+      "react-hooks/exhaustive-deps": "off"
+    }
   },
   "browserslist": {
     "production": [
