@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { useCookies } from 'react-cookie'
+import React, { useState, useEffect, useContext } from 'react'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import Text from 'components/Text'
 import { gql, useLazyQuery } from '@apollo/client'
+import AuthenticationContext from './AuthenticationContext'
 
 const CenteredContainer = styled.div`
   margin: 0 auto;
@@ -49,14 +49,6 @@ const ErrorText = styled(Text)`
   color: red;
 `
 
-const ONE_WEEK_SECONDS = 7 * 24 * 60 * 60
-
-const cookieOptions = {
-  path: '/',
-  maxAge: ONE_WEEK_SECONDS,
-  sameSite: 'strict',
-}
-
 const LOGIN_QUERY = gql`
   query Login($password: String!) {
     login(password: $password) {
@@ -65,8 +57,8 @@ const LOGIN_QUERY = gql`
   }
 `
 
-const Login = ({ setAuthenticated }) => {
-  const [cookies, setCookie, removeCookie] = useCookies(['pva_data_jwt'])
+const Login = () => {
+  const { setAuthenticated } = useContext(AuthenticationContext)
   const [password, setPassword] = useState('')
   const [login, { loading, data, error }] = useLazyQuery(LOGIN_QUERY)
 
@@ -74,17 +66,18 @@ const Login = ({ setAuthenticated }) => {
 
   useEffect(() => {
     if (data) {
-      setCookie('pva_data_jwt', data.login.token, cookieOptions)
+      localStorage.setItem('pvaDataJwt', data.login.token)
       setAuthenticated(true)
     }
-  }, [data, setCookie, setAuthenticated])
+  }, [data, setAuthenticated])
 
   useEffect(() => {
-    if (error && cookies.pva_data_jwt) {
-      removeCookie('pva_data_jwt', cookieOptions)
+    if (error) {
+      console.log(error.message)
+      localStorage.removeItem('pvaDataJwt')
       setAuthenticated(false)
     }
-  }, [error, cookies.pva_data_jwt, removeCookie, setAuthenticated])
+  }, [error, setAuthenticated])
 
   return (
     <CenteredContainer>
@@ -98,7 +91,7 @@ const Login = ({ setAuthenticated }) => {
         onKeyUp={(e) => e.keyCode === 13 && submit()}
         disabled={loading}
       />
-      {error && <ErrorText>Sorry, wrong password!</ErrorText>}
+      {error && <ErrorText>Sorry, wrong password! {error.message}</ErrorText>}
       <LoginButton type="button" onClick={submit}>
         Log In
       </LoginButton>

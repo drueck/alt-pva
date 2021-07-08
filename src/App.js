@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { ApolloProvider } from '@apollo/client'
 import { Router, Link } from '@reach/router'
-import { CookiesProvider, useCookies } from 'react-cookie'
 import DivisionsList from './DivisionsList'
 import Division from './Division'
 import Team from './Team'
@@ -10,6 +9,7 @@ import { Global } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
 import { theme, globalStyles, color } from 'utils/style'
 import { PrimaryHeading } from 'components/Headings'
+import AuthenticationContext from './AuthenticationContext'
 import MaintenanceMessage from './MaintenanceMessage'
 import Login from './Login'
 
@@ -28,33 +28,30 @@ const Main = styled.main`
 const maintenanceMode = false
 
 const App = ({ client }) => {
-  const [cookies] = useCookies(['pva_data_jwt'])
-  const [authenticated, setAuthenticated] = useState(!!cookies.pva_data_jwt)
+  const { authenticated } = useContext(AuthenticationContext)
 
   return (
     <ApolloProvider client={client}>
       <ThemeProvider theme={theme}>
-        <CookiesProvider>
-          <Global styles={globalStyles} />
-          <AppHeader>
-            <PrimaryHeading>
-              <Link to="/">alt-pva</Link>
-            </PrimaryHeading>
-          </AppHeader>
-          <Main>
-            {maintenanceMode ? (
-              <MaintenanceMessage />
-            ) : authenticated ? (
-              <Router>
-                <DivisionsList path="/" />
-                <Division path="/division/:slug" />
-                <Team path="/division/:divisionSlug/team/:teamSlug/*" />
-              </Router>
-            ) : (
-              <Login setAuthenticated={setAuthenticated} />
-            )}
-          </Main>
-        </CookiesProvider>
+        <Global styles={globalStyles} />
+        <AppHeader>
+          <PrimaryHeading>
+            <Link to="/">alt-pva</Link>
+          </PrimaryHeading>
+        </AppHeader>
+        <Main>
+          {maintenanceMode ? (
+            <MaintenanceMessage />
+          ) : authenticated ? (
+            <Router>
+              <DivisionsList path="/" />
+              <Division path="/division/:slug" />
+              <Team path="/division/:divisionSlug/team/:teamSlug/*" />
+            </Router>
+          ) : (
+            <Login />
+          )}
+        </Main>
       </ThemeProvider>
     </ApolloProvider>
   )

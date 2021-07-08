@@ -1,6 +1,5 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
-import { useCookies } from 'react-cookie'
 import TEAM_QUERY from './Team.query'
 import { Router, Link } from '@reach/router'
 import Schedules from './Schedules'
@@ -23,14 +22,8 @@ const StyledNavList = styled(NavList)`
 `
 
 const Team = ({ divisionSlug, teamSlug }) => {
-  const [cookies] = useCookies(['pva_data_jwt'])
   const { loading, error, data } = useQuery(TEAM_QUERY, {
     variables: { divisionSlug, teamSlug },
-    context: {
-      headers: {
-        authorization: `Bearer ${cookies.pva_data_jwt}`,
-      },
-    },
   })
 
   if (loading) return <p>Loading...</p>

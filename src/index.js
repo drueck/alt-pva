@@ -2,21 +2,37 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
-import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
+import { AuthenticationProvider } from './AuthenticationContext'
+
+const httpLink = createHttpLink({
+  uri:
+    process.env.NODE_ENV === 'production'
+      ? 'https://pva-data.gigalixirapp.com/api'
+      : 'http://localhost:9001/api',
+})
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('pvaDataJwt')
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  }
+})
 
 const client = new ApolloClient({
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
-  link: new HttpLink({
-    uri:
-      process.env.NODE_ENV === 'production'
-        ? 'https://pva-data.gigalixirapp.com/api'
-        : 'http://localhost:9001/api',
-  }),
 })
 
 ReactDOM.render(
   <React.StrictMode>
-    <App client={client} />
+    <AuthenticationProvider>
+      <App client={client} />
+    </AuthenticationProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )
