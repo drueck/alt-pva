@@ -39,6 +39,10 @@ const LoginButton = styled.button`
   margin-top: 0.5em;
   padding: 0.5em;
   width: 100%;
+
+  &:hover {
+    background-color: #aba8ec;
+  }
 `
 
 const ErrorText = styled(Text)`
@@ -73,14 +77,14 @@ const Login = ({ setAuthenticated }) => {
       setCookie('pva_data_jwt', data.login.token, cookieOptions)
       setAuthenticated(true)
     }
-  }, [data])
+  }, [data, setCookie, setAuthenticated])
 
   useEffect(() => {
     if (error && cookies.pva_data_jwt) {
       removeCookie('pva_data_jwt', cookieOptions)
       setAuthenticated(false)
     }
-  }, [error])
+  }, [error, cookies.pva_data_jwt, removeCookie, setAuthenticated])
 
   return (
     <CenteredContainer>
