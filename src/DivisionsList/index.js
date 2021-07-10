@@ -4,12 +4,13 @@ import DIVISIONS_QUERY from './DivisionList.query'
 import { SecondaryHeading } from 'components/Headings'
 import NavList from 'components/NavList'
 import NavListLink from 'components/NavListLink'
+import QueryError from 'components/QueryError'
 
 const DivisionsList = () => {
   const { loading, error, data } = useQuery(DIVISIONS_QUERY)
 
   if (loading) return <p>Loading...</p>
-  if (error) return <p>Something went wrong :(</p>
+  if (error) return <QueryError error={error} />
 
   const { divisions } = data
 

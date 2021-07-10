@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
-import { Link } from '@reach/router'
+import { Link } from 'react-router-dom'
 
 const NavListLink = ({ to, replace = false, children, ...props }) => (
   <li {...props}>

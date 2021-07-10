@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
 import TEAM_QUERY from './Team.query'
-import { Router, Link } from '@reach/router'
+import { Switch, Route, Link, useParams, useRouteMatch } from 'react-router-dom'
 import Schedules from './Schedules'
 import Scores from './Scores'
 import Standings from './Standings'
@@ -11,6 +11,7 @@ import NavListLink from 'components/NavListLink'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import Text from 'components/Text'
+import QueryError from 'components/QueryError'
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -21,13 +22,16 @@ const StyledNavList = styled(NavList)`
   margin-bottom: 32px;
 `
 
-const Team = ({ divisionSlug, teamSlug }) => {
+const Team = () => {
+  const { divisionSlug, teamSlug } = useParams()
+  const { url, path } = useRouteMatch()
+
   const { loading, error, data } = useQuery(TEAM_QUERY, {
     variables: { divisionSlug, teamSlug },
   })
 
   if (loading) return <p>Loading...</p>
-  if (error) return <p>Something went wrong :(</p>
+  if (error) return <QueryError error={error} />
 
   const {
     team: {
@@ -52,30 +56,29 @@ const Team = ({ divisionSlug, teamSlug }) => {
         <StyledLink to={`/division/${divisionSlug}`}>{divisionName}</StyledLink>
       </Text>
       <StyledNavList>
-        <NavListLink to="schedules" replace>
+        <NavListLink to={`${url}`} replace>
           Schedules
         </NavListLink>
-        <NavListLink to="scores" replace>
+        <NavListLink to={`${url}/scores`} replace>
           Scores
         </NavListLink>
-        <NavListLink to="standings" replace>
-          Standings
-        </NavListLink>
+        <NavListLink to={`${url}/standings`}>Standings</NavListLink>
       </StyledNavList>
-      <Router>
-        <Schedules
-          path="schedules"
-          scheduledMatches={scheduledMatches}
-          teamId={teamId}
-          divisionSlug={divisionSlug}
-        />
-        <Scores
-          path="scores"
-          completedMatches={completedMatches}
-          teamId={teamId}
-        />
-        <Standings path="standings" standings={standings} />
-      </Router>
+      <Switch>
+        <Route exact path={`${path}`}>
+          <Schedules
+            scheduledMatches={scheduledMatches}
+            teamId={teamId}
+            divisionSlug={divisionSlug}
+          />
+        </Route>
+        <Route path={`${path}/scores`}>
+          <Scores completedMatches={completedMatches} teamId={teamId} />
+        </Route>
+        <Route path={`${path}/standings`}>
+          <Standings standings={standings} />
+        </Route>
+      </Switch>
     </>
   )
 }

@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
-import { ApolloProvider } from '@apollo/client'
-import { Router, Link } from '@reach/router'
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import DivisionsList from './DivisionsList'
 import Division from './Division'
 import Team from './Team'
@@ -9,9 +8,9 @@ import { Global } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
 import { theme, globalStyles, color } from 'utils/style'
 import { PrimaryHeading } from 'components/Headings'
-import AuthenticationContext from './AuthenticationContext'
 import MaintenanceMessage from './MaintenanceMessage'
 import Login from './Login'
+import AuthenticatedRoute from 'components/AuthenticatedRoute'
 
 const AppHeader = styled.header`
   width: 100%;
@@ -27,34 +26,37 @@ const Main = styled.main`
 
 const maintenanceMode = false
 
-const App = ({ client }) => {
-  const { authenticated } = useContext(AuthenticationContext)
-
-  return (
-    <ApolloProvider client={client}>
-      <ThemeProvider theme={theme}>
-        <Global styles={globalStyles} />
-        <AppHeader>
-          <PrimaryHeading>
-            <Link to="/">alt-pva</Link>
-          </PrimaryHeading>
-        </AppHeader>
-        <Main>
-          {maintenanceMode ? (
-            <MaintenanceMessage />
-          ) : authenticated ? (
-            <Router>
-              <DivisionsList path="/" />
-              <Division path="/division/:slug" />
-              <Team path="/division/:divisionSlug/team/:teamSlug/*" />
-            </Router>
-          ) : (
-            <Login />
-          )}
-        </Main>
-      </ThemeProvider>
-    </ApolloProvider>
-  )
-}
+const App = () => (
+  <ThemeProvider theme={theme}>
+    <Router>
+      <Global styles={globalStyles} />
+      <AppHeader>
+        <PrimaryHeading>
+          <Link to="/">alt-pva</Link>
+        </PrimaryHeading>
+      </AppHeader>
+      <Main>
+        {maintenanceMode ? (
+          <MaintenanceMessage />
+        ) : (
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <AuthenticatedRoute exact path="/">
+              <DivisionsList />
+            </AuthenticatedRoute>
+            <AuthenticatedRoute path="/division/:divisionSlug/team/:teamSlug">
+              <Team />
+            </AuthenticatedRoute>
+            <AuthenticatedRoute path="/division/:slug">
+              <Division />
+            </AuthenticatedRoute>
+          </Switch>
+        )}
+      </Main>
+    </Router>
+  </ThemeProvider>
+)
 
 export default App

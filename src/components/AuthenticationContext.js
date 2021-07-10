@@ -6,7 +6,6 @@ export const AuthenticationProvider = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(
     !!localStorage.getItem('pvaDataJwt')
   )
-
   return (
     <AuthenticationContext.Provider value={{ authenticated, setAuthenticated }}>
       {children}

@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import Text from 'components/Text'
 import { gql, useLazyQuery } from '@apollo/client'
-import AuthenticationContext from './AuthenticationContext'
+import AuthenticationContext from 'components/AuthenticationContext'
 
 const CenteredContainer = styled.div`
   margin: 0 auto;
@@ -58,6 +59,10 @@ const LOGIN_QUERY = gql`
 `
 
 const Login = () => {
+  const history = useHistory()
+  const location = useLocation()
+
+  const { from } = location.state || { from: { pathname: '/' } }
   const { setAuthenticated } = useContext(AuthenticationContext)
   const [password, setPassword] = useState('')
   const [login, { loading, data, error }] = useLazyQuery(LOGIN_QUERY)
@@ -68,13 +73,12 @@ const Login = () => {
     if (data) {
       localStorage.setItem('pvaDataJwt', data.login.token)
       setAuthenticated(true)
+      history.replace(from)
     }
-  }, [data, setAuthenticated])
+  }, [data, setAuthenticated, history, from])
 
   useEffect(() => {
     if (error) {
-      console.log(error.message)
-      localStorage.removeItem('pvaDataJwt')
       setAuthenticated(false)
     }
   }, [error, setAuthenticated])
@@ -91,7 +95,7 @@ const Login = () => {
         onKeyUp={(e) => e.keyCode === 13 && submit()}
         disabled={loading}
       />
-      {error && <ErrorText>Sorry, wrong password! {error.message}</ErrorText>}
+      {error && <ErrorText>Sorry, wrong password!</ErrorText>}
       <LoginButton type="button" onClick={submit}>
         Log In
       </LoginButton>
