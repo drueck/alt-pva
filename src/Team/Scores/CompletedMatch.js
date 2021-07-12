@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import { formatDate, formatTime } from 'utils/calendar'
-import { Link } from '@reach/router'
+import { Link } from 'react-router-dom'
 import { css } from '@emotion/core'
 import {
   formatScoreFromPerspective,
@@ -131,9 +131,7 @@ const CompletedMatch = ({ match, teamId, divisionSlug }) => {
       </DateTime>
       <Opponent>
         vs.{' '}
-        <StyledLink
-          to={`/division/${divisionSlug}/team/${opponent.slug}/schedules`}
-        >
+        <StyledLink to={`/division/${divisionSlug}/team/${opponent.slug}`}>
           {opponent.name}
         </StyledLink>
       </Opponent>

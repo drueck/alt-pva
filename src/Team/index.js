@@ -12,6 +12,7 @@ import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import Text from 'components/Text'
 import QueryError from 'components/QueryError'
+import ordinal from 'ordinal'
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -37,6 +38,7 @@ const Team = () => {
     team: {
       id: teamId,
       name: teamName,
+      rank,
       record,
       division: { name: divisionName, standings },
       scheduledMatches,
@@ -51,9 +53,10 @@ const Team = () => {
     <>
       <SecondaryHeading>{teamName}</SecondaryHeading>
       <Text>
-        Currently with a record of {record.wins} {winsText} and {record.losses}{' '}
-        {lossesText} in{' '}
-        <StyledLink to={`/division/${divisionSlug}`}>{divisionName}</StyledLink>
+        Currently in {ordinal(rank)} place in{' '}
+        <StyledLink to={`/division/${divisionSlug}`}>{divisionName}</StyledLink>{' '}
+        with a record of {record.wins} {winsText} and {record.losses}{' '}
+        {lossesText}.
       </Text>
       <StyledNavList>
         <NavListLink to={`${url}`} replace>

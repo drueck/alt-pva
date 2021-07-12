@@ -20,11 +20,22 @@ const standing = {
   matchPoints: 4.5,
   matchPointsPossible: 40.5,
   matchPointsPercentage: 11.11,
+  rank: 7,
 }
 
 export const Default = () => (
   <ThemeProvider theme={theme}>
     <Global styles={globalStyles} />
     <Standing standing={standing} divisionSlug="coed-a-wednesday" />
+  </ThemeProvider>
+)
+
+export const DoubleDigitRank = () => (
+  <ThemeProvider theme={theme}>
+    <Global styles={globalStyles} />
+    <Standing
+      standing={{ ...standing, rank: 15 }}
+      divisionSlug="coed-a-wednesday"
+    />
   </ThemeProvider>
 )

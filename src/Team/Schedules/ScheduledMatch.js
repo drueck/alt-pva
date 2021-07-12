@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import { formatDate, formatTime } from 'utils/calendar'
-import { Link } from '@reach/router'
+import { Link } from 'react-router-dom'
 
 const Container = styled.div`
   display: grid;
@@ -93,9 +93,7 @@ const ScheduledMatch = ({ match, teamId, divisionSlug, checkInUrl }) => {
       </DateTime>
       <Opponent>
         {vsOrAt}{' '}
-        <StyledLink
-          to={`/division/${divisionSlug}/team/${opponent.slug}/schedules`}
-        >
+        <StyledLink to={`/division/${divisionSlug}/team/${opponent.slug}`}>
           {opponent.name}
         </StyledLink>
         {opponentRecord}
