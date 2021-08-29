@@ -4,6 +4,7 @@ import DIVISIONS_QUERY from './DivisionList.query'
 import { SecondaryHeading } from 'components/Headings'
 import NavList from 'components/NavList'
 import NavListLink from 'components/NavListLink'
+import Text from 'components/Text'
 
 const DivisionsList = () => {
   const { loading, error, data } = useQuery(DIVISIONS_QUERY)
@@ -16,13 +17,19 @@ const DivisionsList = () => {
   return (
     <>
       <SecondaryHeading>Divisions</SecondaryHeading>
-      <NavList>
-        {divisions.map(({ id, slug, name }) => (
-          <NavListLink key={id} to={`/division/${slug}`}>
-            {name}
-          </NavListLink>
-        ))}
-      </NavList>
+      {divisions.length ? (
+        <NavList>
+          {divisions.map(({ id, slug, name }) => (
+            <NavListLink key={id} to={`/division/${slug}`}>
+              {name}
+            </NavListLink>
+          ))}
+        </NavList>
+      ) : (
+        <Text>
+          Looks like we're between seasons. No divisions have been posted yet.
+        </Text>
+      )}
     </>
   )
 }

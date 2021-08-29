@@ -23,7 +23,7 @@ const Main = styled.main`
   margin: 0 auto 50px;
 `
 
-const maintenanceMode = true
+const maintenanceMode = false
 
 const App = ({ client }) => (
   <ApolloProvider client={client}>
