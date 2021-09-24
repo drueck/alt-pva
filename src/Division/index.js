@@ -1,11 +1,14 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import DIVISION_QUERY from './Division.query'
 import { SecondaryHeading } from 'components/Headings'
 import NavList from 'components/NavList'
 import NavListLink from 'components/NavListLink'
 
-const Division = ({ slug }) => {
+const Division = () => {
+  const { slug } = useParams()
+
   const { loading, error, data } = useQuery(DIVISION_QUERY, {
     variables: { slug },
   })
@@ -22,10 +25,7 @@ const Division = ({ slug }) => {
       <SecondaryHeading>{divisionName}</SecondaryHeading>
       <NavList>
         {teams.map(({ id, name, slug }) => (
-          <NavListLink
-            key={id}
-            to={`/division/${divisionSlug}/team/${slug}/schedules`}
-          >
+          <NavListLink key={id} to={`/division/${divisionSlug}/team/${slug}`}>
             {name}
           </NavListLink>
         ))}

@@ -8,7 +8,8 @@ const facilityIds = {
   'Delta Park': 2,
   'Brentwood Park': 3,
   'Flavel Park': 4,
-  'Parklane Park': 5,
+  'Woodstock Park': 5,
+  'Parklane Park': 6,
 }
 
 const checkInUrl = ({ date, location }) => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { ApolloProvider } from '@apollo/client'
-import { Router, Link } from '@reach/router'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import DivisionsList from './DivisionsList'
 import Division from './Division'
 import Team from './Team'
@@ -28,25 +28,31 @@ const maintenanceMode = false
 const App = ({ client }) => (
   <ApolloProvider client={client}>
     <ThemeProvider theme={theme}>
-      <Global styles={globalStyles} />
-      <AppHeader>
-        <PrimaryHeading>
-          <Link to="/">alt-pva</Link>
-        </PrimaryHeading>
-      </AppHeader>
-      <Main>
-        <Router>
+      <Router>
+        <Global styles={globalStyles} />
+        <AppHeader>
+          <PrimaryHeading>
+            <Link to="/">alt-pva</Link>
+          </PrimaryHeading>
+        </AppHeader>
+        <Main>
           {maintenanceMode ? (
-            <MaintenanceMessage path="/*" />
+            <MaintenanceMessage />
           ) : (
-            <>
-              <DivisionsList path="/" />
-              <Division path="/division/:slug" />
-              <Team path="/division/:divisionSlug/team/:teamSlug/*" />
-            </>
+            <Switch>
+              <Route exact path="/">
+                <DivisionsList />
+              </Route>
+              <Route path="/division/:divisionSlug/team/:teamSlug">
+                <Team />
+              </Route>
+              <Route path="/division/:slug">
+                <Division />
+              </Route>
+            </Switch>
           )}
-        </Router>
-      </Main>
+        </Main>
+      </Router>
     </ThemeProvider>
   </ApolloProvider>
 )

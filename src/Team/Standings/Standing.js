@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
-import { Link } from '@reach/router'
+import { Link } from 'react-router-dom'
 
 const formatPercentage = (percentageString) =>
   Number.parseFloat(percentageString).toFixed(2)
@@ -37,7 +37,7 @@ const Standing = ({ standing, divisionSlug }) => {
   return (
     <Container>
       <TeamName>
-        <StyledLink to={`/division/${divisionSlug}/team/${slug}/schedules`}>
+        <StyledLink to={`/division/${divisionSlug}/team/${slug}`}>
           {name}
         </StyledLink>
       </TeamName>
