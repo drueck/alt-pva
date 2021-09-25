@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import { Link } from 'react-router-dom'
+import RankOrdinal from 'components/RankOrdinal'
 
 const formatPercentage = (percentageString) =>
   Number.parseFloat(percentageString).toFixed(2)
@@ -15,7 +16,10 @@ const Container = styled.div`
   margin-bottom: 2px;
 `
 
-const TeamName = styled.div``
+const TeamName = styled.div`
+  line-height: 2em;
+  margin-bottom: 1em;
+`
 const WinLossRecord = styled.div``
 const MatchPointsRecord = styled.div``
 
@@ -33,11 +37,13 @@ const Standing = ({ standing, divisionSlug }) => {
     matchPoints,
     matchPointsPossible,
     matchPointsPercentage,
+    rank,
   } = standing
   return (
     <Container>
       <TeamName>
         <StyledLink to={`/division/${divisionSlug}/team/${slug}`}>
+          <RankOrdinal rank={rank} />
           {name}
         </StyledLink>
       </TeamName>

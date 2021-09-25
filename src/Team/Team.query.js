@@ -6,6 +6,7 @@ const TEAM_QUERY = gql`
       id
       name
       slug
+      rank
       division {
         id
         name
@@ -28,6 +29,7 @@ const TEAM_QUERY = gql`
           matchPointsPossible
           matchPointsPercentage
           winningPercentage
+          rank
         }
       }
       record {

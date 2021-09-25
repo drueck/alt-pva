@@ -10,6 +10,7 @@ const DIVISION_QUERY = gql`
         id
         name
         slug
+        rank
       }
     }
   }
