@@ -4,14 +4,20 @@ import Text from 'components/Text'
 import CompletedMatch from './CompletedMatch'
 import { useParams } from 'react-router-dom'
 
+const getMatchDate = (match) => new Date(`${match.date}T${match.time}`)
+
+const compareMatchDatesDesc = (matchA, matchB) =>
+  getMatchDate(matchB) - getMatchDate(matchA)
+
 const Scores = ({ completedMatches, teamId }) => {
   const { divisionSlug } = useParams()
+  const sortedMatches = completedMatches.slice(0).sort(compareMatchDatesDesc)
 
   return (
     <>
       <TertiaryHeading>Scores</TertiaryHeading>
-      {completedMatches.length ? (
-        completedMatches.map((match) => (
+      {sortedMatches.length ? (
+        sortedMatches.map((match) => (
           <CompletedMatch
             key={match.id}
             match={match}
