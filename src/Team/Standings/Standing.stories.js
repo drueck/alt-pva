@@ -1,8 +1,6 @@
 import React from 'react'
 import Standing from './Standing'
-import { ThemeProvider } from 'emotion-theming'
-import { theme, globalStyles } from 'utils/style'
-import { Global } from '@emotion/core'
+import Story from 'components/Story'
 
 export default {
   component: Standing,
@@ -24,18 +22,16 @@ const standing = {
 }
 
 export const Default = () => (
-  <ThemeProvider theme={theme}>
-    <Global styles={globalStyles} />
+  <Story>
     <Standing standing={standing} divisionSlug="coed-a-wednesday" />
-  </ThemeProvider>
+  </Story>
 )
 
 export const DoubleDigitRank = () => (
-  <ThemeProvider theme={theme}>
-    <Global styles={globalStyles} />
+  <Story>
     <Standing
       standing={{ ...standing, rank: 15 }}
       divisionSlug="coed-a-wednesday"
     />
-  </ThemeProvider>
+  </Story>
 )

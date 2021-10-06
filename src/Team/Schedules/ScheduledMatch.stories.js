@@ -1,8 +1,6 @@
 import React from 'react'
 import ScheduledMatch from './ScheduledMatch'
-import { ThemeProvider } from 'emotion-theming'
-import { theme, globalStyles } from 'utils/style'
-import { Global } from '@emotion/core'
+import Story from 'components/Story'
 
 export default {
   component: ScheduledMatch,
@@ -37,57 +35,52 @@ const match = {
 }
 
 export const Home = () => (
-  <ThemeProvider theme={theme}>
-    <Global styles={globalStyles} />
+  <Story>
     <ScheduledMatch
       match={match}
       teamId="12345"
       divisionSlug="coed-a-thursday"
     />
-  </ThemeProvider>
+  </Story>
 )
 
 export const Visitor = () => (
-  <ThemeProvider theme={theme}>
-    <Global styles={globalStyles} />
+  <Story>
     <ScheduledMatch
       match={match}
       teamId="67890"
       divisionSlug="coed-a-thursday"
     />
-  </ThemeProvider>
+  </Story>
 )
 
 export const WithCourtInParens = () => (
-  <ThemeProvider theme={theme}>
-    <Global styles={globalStyles} />
+  <Story>
     <ScheduledMatch
       match={{ ...match, court: '(2)' }}
       teamId="12345"
       divisionSlug="coed-a-thursday"
     />
-  </ThemeProvider>
+  </Story>
 )
 
 export const WithCourtWithoutParens = () => (
-  <ThemeProvider theme={theme}>
-    <Global styles={globalStyles} />
+  <Story>
     <ScheduledMatch
       match={{ ...match, court: 'Aux Gym' }}
       teamId="12345"
       divisionSlug="coed-a-thursday"
     />
-  </ThemeProvider>
+  </Story>
 )
 
 export const WithCheckIn = () => (
-  <ThemeProvider theme={theme}>
-    <Global styles={globalStyles} />
+  <Story>
     <ScheduledMatch
       match={match}
       teamId="12345"
       divisionSlug="coed-a-thursday"
       checkInUrl="https://register.portlandvolleyball.org/checkin/facility/2/"
     />
-  </ThemeProvider>
+  </Story>
 )

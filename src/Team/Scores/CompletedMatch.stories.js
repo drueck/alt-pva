@@ -1,8 +1,6 @@
 import React from 'react'
 import CompletedMatch from './CompletedMatch'
-import { ThemeProvider } from 'emotion-theming'
-import { theme, globalStyles } from 'utils/style'
-import { Global } from '@emotion/core'
+import Story from 'components/Story'
 
 export default {
   component: CompletedMatch,
@@ -47,34 +45,31 @@ const tiedMatch = {
 }
 
 export const Win = () => (
-  <ThemeProvider theme={theme}>
-    <Global styles={globalStyles} />
+  <Story>
     <CompletedMatch
       match={wonMatch}
       teamId="12345"
       divisionSlug="coed-a-thursday"
     />
-  </ThemeProvider>
+  </Story>
 )
 
 export const Loss = () => (
-  <ThemeProvider theme={theme}>
-    <Global styles={globalStyles} />
+  <Story>
     <CompletedMatch
       match={lostMatch}
       teamId="12345"
       divisionSlug="coed-a-thursday"
     />
-  </ThemeProvider>
+  </Story>
 )
 
 export const Tie = () => (
-  <ThemeProvider theme={theme}>
-    <Global styles={globalStyles} />
+  <Story>
     <CompletedMatch
       match={tiedMatch}
       teamId="12345"
       divisionSlug="coed-a-thursday"
     />
-  </ThemeProvider>
+  </Story>
 )
