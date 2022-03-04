@@ -30,6 +30,15 @@ const TEAM_QUERY = gql`
           matchPointsPercentage
           winningPercentage
           rank
+          rankReason {
+            id
+            statistic
+            lowerTeam {
+              name
+            }
+            teamValue
+            lowerTeamValue
+          }
         }
       }
       record {

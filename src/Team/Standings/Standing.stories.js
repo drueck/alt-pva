@@ -19,6 +19,14 @@ const standing = {
   matchPointsPossible: 40.5,
   matchPointsPercentage: 11.11,
   rank: 7,
+  rankReason: {
+    statistic: 'head to head record (points differential)',
+    lowerTeam: {
+      name: 'East of Eden',
+    },
+    teamValue: 1,
+    lowerTeamValue: -1,
+  },
 }
 
 export const Default = () => (

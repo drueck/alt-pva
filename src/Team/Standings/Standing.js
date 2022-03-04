@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import { Link } from 'react-router-dom'
 import RankOrdinal from 'components/RankOrdinal'
+import RankReason from './RankReason'
 
 const formatPercentage = (percentageString) =>
   Number.parseFloat(percentageString).toFixed(2)
@@ -38,6 +39,7 @@ const Standing = ({ standing, divisionSlug }) => {
     matchPointsPossible,
     matchPointsPercentage,
     rank,
+    rankReason,
   } = standing
   return (
     <Container>
@@ -55,6 +57,7 @@ const Standing = ({ standing, divisionSlug }) => {
         {formatMatchPoints(matchPointsPossible)} (
         {formatPercentage(matchPointsPercentage)}%)
       </MatchPointsRecord>
+      {rankReason && <RankReason name={name} rankReason={rankReason} />}
     </Container>
   )
 }
