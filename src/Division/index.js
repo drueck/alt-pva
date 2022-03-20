@@ -21,7 +21,19 @@ const Division = () => {
     division: { name: divisionName, slug: divisionSlug, teams },
   } = data
 
-  const sortedTeams = teams.slice(0).sort((a, b) => a.rank - b.rank)
+  const sortedTeams = teams.slice(0).sort((a, b) => {
+    const rankResult = a.rank - b.rank
+    if (rankResult !== 0) {
+      return rankResult
+    }
+    if (a.name < b.name) {
+      return -1
+    }
+    if (a.name > b.name) {
+      return 1
+    }
+    return 0
+  })
 
   return (
     <>

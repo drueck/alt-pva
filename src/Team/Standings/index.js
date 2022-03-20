@@ -7,7 +7,19 @@ import { useParams } from 'react-router-dom'
 const Standings = ({ standings }) => {
   const { divisionSlug } = useParams()
 
-  const sortedStandings = standings.slice(0).sort((a, b) => a.rank - b.rank)
+  const sortedStandings = standings.slice(0).sort((a, b) => {
+    const rankResult = a.rank - b.rank
+    if (rankResult !== 0) {
+      return rankResult
+    }
+    if (a.team.name < b.team.name) {
+      return -1
+    }
+    if (a.team.name > b.team.name) {
+      return 1
+    }
+    return 0
+  })
 
   return (
     <>
