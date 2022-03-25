@@ -13,6 +13,7 @@ const Rank = styled.span`
   text-align: center;
   vertical-align: middle;
   width: 4em;
+  flex-shrink: 0;
 `
 
 const RankOrdinal = ({ rank }) => <Rank>{ordinal(rank)}</Rank>

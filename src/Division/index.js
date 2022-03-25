@@ -5,7 +5,7 @@ import DIVISION_QUERY from './Division.query'
 import { SecondaryHeading } from 'components/Headings'
 import NavList from 'components/NavList'
 import NavListLink from 'components/NavListLink'
-import RankOrdinal from 'components/RankOrdinal'
+import TeamNameWithRank from 'components/TeamNameWithRank'
 
 const Division = () => {
   const { slug } = useParams()
@@ -41,8 +41,7 @@ const Division = () => {
       <NavList>
         {sortedTeams.map(({ id, name, slug, rank }) => (
           <NavListLink key={id} to={`/division/${divisionSlug}/team/${slug}`}>
-            <RankOrdinal rank={rank} />
-            {name}
+            <TeamNameWithRank name={name} rank={rank} />
           </NavListLink>
         ))}
       </NavList>

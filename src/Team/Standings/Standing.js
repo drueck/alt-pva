@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import { Link } from 'react-router-dom'
-import RankOrdinal from 'components/RankOrdinal'
+import TeamNameWithRank from 'components/TeamNameWithRank'
 import RankReason from './RankReason'
 
 const formatPercentage = (percentageString) =>
@@ -45,8 +45,7 @@ const Standing = ({ standing, divisionSlug }) => {
     <Container>
       <TeamName>
         <StyledLink to={`/division/${divisionSlug}/team/${slug}`}>
-          <RankOrdinal rank={rank} />
-          {name}
+          <TeamNameWithRank name={name} rank={rank} />
         </StyledLink>
       </TeamName>
       <WinLossRecord>
