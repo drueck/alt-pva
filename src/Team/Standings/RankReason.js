@@ -7,10 +7,18 @@ const obviousReasons = [
   'team name',
 ]
 
-const Container = styled.div``
+const Details = styled.details`
+  margin-top: 1rem;
+`
+
+const SummaryContent = styled.span`
+  padding-left: 0.5rem;
+  cursor: default;
+`
 
 const TieBreaker = styled.p`
   font-style: italic;
+  text-transform: capitalize;
 `
 
 const ValueList = styled.dl`
@@ -40,8 +48,11 @@ const RankReason = ({ name, rankReason }) => {
   } = rankReason
 
   return (
-    <Container>
-      <TieBreaker>tie breaker: {statistic}</TieBreaker>
+    <Details>
+      <summary>
+        <SummaryContent>Details</SummaryContent>
+      </summary>
+      <TieBreaker>Tie Breaker: {statistic}</TieBreaker>
       <ValueList>
         <div>
           <TeamName>{name}</TeamName>
@@ -52,7 +63,7 @@ const RankReason = ({ name, rankReason }) => {
           <Value>{lowerTeamValue}</Value>
         </div>
       </ValueList>
-    </Container>
+    </Details>
   )
 }
 
