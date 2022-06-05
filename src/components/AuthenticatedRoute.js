@@ -3,13 +3,13 @@ import { Redirect, Route } from 'react-router-dom'
 import AuthenticationContext from 'components/AuthenticationContext'
 
 const AuthenticatedRoute = ({ children, ...rest }) => {
-  const { authenticated } = useContext(AuthenticationContext)
+  const { loginRequired, authenticated } = useContext(AuthenticationContext)
 
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        authenticated ? (
+        authenticated || !loginRequired ? (
           children
         ) : (
           <Redirect

@@ -3,7 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import Text from 'components/Text'
-import { gql, useLazyQuery } from '@apollo/client'
+import { gql, useQuery, useLazyQuery } from '@apollo/client'
 import AuthenticationContext from 'components/AuthenticationContext'
 
 const CenteredContainer = styled.div`
@@ -51,6 +51,12 @@ const ErrorText = styled(Text)`
   color: red;
 `
 
+const LOGIN_REQUIRED_QUERY = gql`
+  query LoginRequired {
+    loginRequired
+  }
+`
+
 const LOGIN_QUERY = gql`
   query Login($password: String!) {
     login(password: $password) {
@@ -64,8 +70,28 @@ const Login = () => {
   const location = useLocation()
 
   const { from } = location.state || { from: { pathname: '/' } }
-  const { setAuthenticated } = useContext(AuthenticationContext)
+  const { setAuthenticated, setLoginRequired } = useContext(
+    AuthenticationContext
+  )
   const [password, setPassword] = useState('')
+
+  const { loading: loginRequiredLoading, data: loginRequiredData } = useQuery(
+    LOGIN_REQUIRED_QUERY
+  )
+
+  useEffect(() => {
+    if (loginRequiredData) {
+      if (loginRequiredData.loginRequired) {
+        localStorage.removeItem('pvaDataLoginNotRequired')
+        setLoginRequired(true)
+      } else {
+        localStorage.setItem('pvaDataLoginNotRequired', 'true')
+        setLoginRequired(false)
+        history.replace(from)
+      }
+    }
+  }, [loginRequiredData, setLoginRequired, history, from])
+
   const [login, { loading, data, error }] = useLazyQuery(LOGIN_QUERY)
 
   const submit = () => login({ variables: { password } })
@@ -85,22 +111,24 @@ const Login = () => {
   }, [error, setAuthenticated])
 
   return (
-    <CenteredContainer>
-      <PasswordLabel htmlFor="password">Password, please</PasswordLabel>
-      <PasswordInput
-        id="password"
-        type="password"
-        autoFocus
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        onKeyUp={(e) => e.keyCode === 13 && submit()}
-        disabled={loading}
-      />
-      {error && <ErrorText>Sorry, wrong password!</ErrorText>}
-      <LoginButton type="button" onClick={submit}>
-        Log In
-      </LoginButton>
-    </CenteredContainer>
+    !loginRequiredLoading && (
+      <CenteredContainer>
+        <PasswordLabel htmlFor="password">Password, please</PasswordLabel>
+        <PasswordInput
+          id="password"
+          type="password"
+          autoFocus
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          onKeyUp={(e) => e.keyCode === 13 && submit()}
+          disabled={loading}
+        />
+        {error && <ErrorText>Sorry, wrong password!</ErrorText>}
+        <LoginButton type="button" onClick={submit}>
+          Log In
+        </LoginButton>
+      </CenteredContainer>
+    )
   )
 }
 
