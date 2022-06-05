@@ -8,6 +8,7 @@ export const theme = {
     mediumGreen: '#8c9b84',
     darkGreen: '#485A40',
     mutedBlue: '#3B719f',
+    lightMutedBlue: '#578aba',
     perrywinkle: '#8f8ce7',
     mediumPink: '#A78E93',
     darkPink: '#61454A',

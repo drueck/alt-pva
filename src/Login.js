@@ -14,7 +14,7 @@ const CenteredContainer = styled.div`
 `
 
 const PasswordLabel = styled.label`
-  color: ${color('perrywinkle')};
+  color: ${color('mutedBlue')};
   font-size: 1.3em;
   font-weight: bold;
   line-height: 2em;
@@ -31,7 +31,7 @@ const PasswordInput = styled.input`
 `
 
 const LoginButton = styled.button`
-  background-color: ${color('perrywinkle')};
+  background-color: ${color('mutedBlue')};
   border-radius: 0.3em;
   border: none;
   color: white;
@@ -41,8 +41,9 @@ const LoginButton = styled.button`
   padding: 0.5em;
   width: 100%;
 
-  &:hover {
-    background-color: #aba8ec;
+  &:hover,
+  &:focus-visible {
+    background-color: ${color('lightMutedBlue')};
   }
 `
 
