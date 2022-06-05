@@ -1,5 +1,4 @@
 import React from 'react'
-import { ApolloProvider } from '@apollo/client'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import DivisionsList from './DivisionsList'
 import Division from './Division'
@@ -10,6 +9,8 @@ import { ThemeProvider } from 'emotion-theming'
 import { theme, globalStyles, color } from 'utils/style'
 import { PrimaryHeading } from 'components/Headings'
 import MaintenanceMessage from './MaintenanceMessage'
+import Login from './Login'
+import AuthenticatedRoute from 'components/AuthenticatedRoute'
 
 const AppHeader = styled.header`
   width: 100%;
@@ -23,38 +24,39 @@ const Main = styled.main`
   margin: 0 auto 50px;
 `
 
-const maintenanceMode = true
+const maintenanceMode = false
 
-const App = ({ client }) => (
-  <ApolloProvider client={client}>
-    <ThemeProvider theme={theme}>
-      <Router>
-        <Global styles={globalStyles} />
-        <AppHeader>
-          <PrimaryHeading>
-            <Link to="/">alt-pva</Link>
-          </PrimaryHeading>
-        </AppHeader>
-        <Main>
-          {maintenanceMode ? (
-            <MaintenanceMessage />
-          ) : (
-            <Switch>
-              <Route exact path="/">
-                <DivisionsList />
-              </Route>
-              <Route path="/division/:divisionSlug/team/:teamSlug">
-                <Team />
-              </Route>
-              <Route path="/division/:slug">
-                <Division />
-              </Route>
-            </Switch>
-          )}
-        </Main>
-      </Router>
-    </ThemeProvider>
-  </ApolloProvider>
+const App = () => (
+  <ThemeProvider theme={theme}>
+    <Router>
+      <Global styles={globalStyles} />
+      <AppHeader>
+        <PrimaryHeading>
+          <Link to="/">alt-pva</Link>
+        </PrimaryHeading>
+      </AppHeader>
+      <Main>
+        {maintenanceMode ? (
+          <MaintenanceMessage />
+        ) : (
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <AuthenticatedRoute exact path="/">
+              <DivisionsList />
+            </AuthenticatedRoute>
+            <AuthenticatedRoute path="/division/:divisionSlug/team/:teamSlug">
+              <Team />
+            </AuthenticatedRoute>
+            <AuthenticatedRoute path="/division/:slug">
+              <Division />
+            </AuthenticatedRoute>
+          </Switch>
+        )}
+      </Main>
+    </Router>
+  </ThemeProvider>
 )
 
 export default App

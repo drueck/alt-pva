@@ -55,3 +55,13 @@ export const WithTieBreakInfo = () => (
     />
   </Story>
 )
+
+export const DoubleDigitRank = () => (
+  <ThemeProvider theme={theme}>
+    <Global styles={globalStyles} />
+    <Standing
+      standing={{ ...standing, rank: 15 }}
+      divisionSlug="coed-a-wednesday"
+    />
+  </ThemeProvider>
+)

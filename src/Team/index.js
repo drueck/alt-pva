@@ -11,6 +11,7 @@ import NavListLink from 'components/NavListLink'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import Text from 'components/Text'
+import QueryError from 'components/QueryError'
 import ordinal from 'ordinal'
 
 const StyledLink = styled(Link)`
@@ -31,7 +32,7 @@ const Team = () => {
   })
 
   if (loading) return <p>Loading...</p>
-  if (error) return <p>Something went wrong :(</p>
+  if (error) return <QueryError error={error} />
 
   const {
     team: {

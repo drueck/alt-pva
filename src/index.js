@@ -2,22 +2,36 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
-import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
+import { AuthenticationProvider } from 'components/AuthenticationContext'
+import Apollo from 'components/Apollo'
 
-const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  link: new HttpLink({
-    uri:
-      process.env.NODE_ENV === 'production'
-        ? 'https://pva-data.gigalixirapp.com/api'
-        : 'http://localhost:9001/api',
-  }),
-})
+// There seems to be a bug in Apollo Client or something related when
+// using React.StrictMode where it gives a warning in the console about
+// updating state in an unmounted component. I think this is caused by
+// doing a navigation in a useEffect as a result of query results.
+// Taking away React.StrictMode removes the warning. I'd like to put this
+// back though when this is resolved.
+//
+// https://github.com/apollographql/apollo-client/issues/8011
+// https://github.com/apollographql/apollo-client/issues/6209
+//
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <AuthenticationProvider>
+//       <Apollo>
+//         <App />
+//       </Apollo>
+//     </AuthenticationProvider>
+//   </React.StrictMode>,
+//   document.getElementById('root')
+// )
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App client={client} />
-  </React.StrictMode>,
+  <AuthenticationProvider>
+    <Apollo>
+      <App />
+    </Apollo>
+  </AuthenticationProvider>,
   document.getElementById('root')
 )
 

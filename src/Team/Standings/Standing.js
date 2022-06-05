@@ -49,7 +49,8 @@ const Standing = ({ standing, divisionSlug }) => {
         </StyledLink>
       </TeamName>
       <WinLossRecord>
-        Wins: {wins}, Losses: {losses} ({formatPercentage(winningPercentage)}%)
+        Wins: {wins}, Losses: {losses} ({formatPercentage(winningPercentage)}
+        %)
       </WinLossRecord>
       <MatchPointsRecord>
         Match Points: {formatMatchPoints(matchPoints)}/

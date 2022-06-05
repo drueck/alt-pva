@@ -6,6 +6,7 @@ import { SecondaryHeading } from 'components/Headings'
 import NavList from 'components/NavList'
 import NavListLink from 'components/NavListLink'
 import TeamNameWithRank from 'components/TeamNameWithRank'
+import QueryError from 'components/QueryError'
 
 const Division = () => {
   const { slug } = useParams()
@@ -15,7 +16,7 @@ const Division = () => {
   })
 
   if (loading) return <p>Loading...</p>
-  if (error) return <p>Something went wrong :(</p>
+  if (error) return <QueryError error={error} />
 
   const {
     division: { name: divisionName, slug: divisionSlug, teams },
