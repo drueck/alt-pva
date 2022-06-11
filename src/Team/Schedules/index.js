@@ -12,8 +12,10 @@ const facilityIds = {
   'Parklane Park': 6,
 }
 
+const checkInRequired = false
+
 const checkInUrl = ({ date, location }) => {
-  if (isToday(date) && facilityIds[location]) {
+  if (checkInRequired && isToday(date) && facilityIds[location]) {
     return `https://register.portlandvolleyball.org/checkin/facility/${facilityIds[location]}/`
   }
   return undefined
