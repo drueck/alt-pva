@@ -3,15 +3,14 @@ import { curry } from 'utils/fp'
 
 export const theme = {
   colors: {
-    lighterGrey: '#f0f0ef',
-    lightGrey: '#d8dcd6',
-    mediumGreen: '#8c9b84',
-    darkGreen: '#485A40',
+    lightGreen: '#90b37f',
     mutedBlue: '#3B719f',
     lightMutedBlue: '#578aba',
     perrywinkle: '#8f8ce7',
-    mediumPink: '#A78E93',
-    darkPink: '#61454A',
+    lightPink: '#b37f88',
+    darkModeBackground: '#2e3544',
+    darkModeBlack: '#252a36',
+    darkModeText: '#bdc0bb',
   },
 }
 
@@ -19,7 +18,9 @@ export const color = curry((colorName, props) => props.theme.colors[colorName])
 
 export const globalStyles = css`
   body {
+    color: ${theme.colors.darkModeText};
+    background-color: ${theme.colors.darkModeBackground};
     margin: 0;
-    font-family: Courier New, monospace;
+    font-family: 'Roboto Mono', monospace;
   }
 `

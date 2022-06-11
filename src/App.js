@@ -14,7 +14,7 @@ import AuthenticatedRoute from 'components/AuthenticatedRoute'
 
 const AppHeader = styled.header`
   width: 100%;
-  background-color: ${color('lighterGrey')};
+  background-color: ${color('darkModeBlack')};
   text-align: center;
 `
 

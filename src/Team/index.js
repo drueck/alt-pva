@@ -16,7 +16,7 @@ import ordinal from 'ordinal'
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: ${color('mutedBlue')};
+  color: ${color('lightMutedBlue')};
 `
 
 const StyledNavList = styled(NavList)`

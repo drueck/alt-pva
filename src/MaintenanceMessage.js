@@ -6,25 +6,20 @@ import Text from 'components/Text'
 
 const PVALink = styled.a`
   text-decoration: none;
-  color: ${color('mutedBlue')};
+  color: ${color('lightMutedBlue')};
 `
 
 const MaintenanceMessage = () => (
   <>
     <TertiaryHeading>Paused, For Now</TertiaryHeading>
     <Text>
-      This site is on hold for now due to things being in flux on{' '}
+      This site is currently down for maintenance or updates. Please check{' '}
       <PVALink href="https://portlandvolleyball.org">
         portlandvolleyball.org
-      </PVALink>
-      .
+      </PVALink>{' '}
+      for your schedules, scores, and standings, or ask your team captain for
+      the details. Apologies for the inconvenience.
     </Text>
-    <Text>
-      Please check the main PVA website for your schedules, scores, and
-      standings, or ask your team captain for the 411. Hope to be back in action
-      when things settle down.
-    </Text>
-    <Text>#ThanksPortlandParksAndRec #Sarcasm</Text>
   </>
 )
 

@@ -14,16 +14,19 @@ const CenteredContainer = styled.div`
 `
 
 const PasswordLabel = styled.label`
-  color: ${color('mutedBlue')};
+  display: block;
+  color: ${color('darkModeText')};
   font-size: 1.3em;
   font-weight: bold;
   line-height: 2em;
-  margin: 10px 0;
+  margin: 10px 0 20px;
 `
 
 const PasswordInput = styled.input`
+  border: 1px solid ${color('darkModeText')};
   border-radius: 0.3em;
-  border: 1px solid ${color('mutedBlue')};
+  background-color: ${color('darkModeBlack')};
+  color: ${color('darkModeText')};
   font-size: 2em;
   padding: 0.5em;
   text-align: center;
@@ -32,9 +35,9 @@ const PasswordInput = styled.input`
 
 const LoginButton = styled.button`
   background-color: ${color('mutedBlue')};
+  color: ${color('darkModeText')};
   border-radius: 0.3em;
   border: none;
-  color: white;
   display: block;
   font-size: 2em;
   margin-top: 0.5em;
@@ -48,7 +51,7 @@ const LoginButton = styled.button`
 `
 
 const ErrorText = styled(Text)`
-  color: red;
+  color: ${color('lightPink')};
 `
 
 const LOGIN_REQUIRED_QUERY = gql`
@@ -113,7 +116,9 @@ const Login = () => {
   return (
     !loginRequiredLoading && (
       <CenteredContainer>
-        <PasswordLabel htmlFor="password">Password, please</PasswordLabel>
+        <PasswordLabel htmlFor="password">
+          keep it secret, keep it safe
+        </PasswordLabel>
         <PasswordInput
           id="password"
           type="password"
@@ -125,7 +130,7 @@ const Login = () => {
         />
         {error && <ErrorText>Sorry, wrong password!</ErrorText>}
         <LoginButton type="button" onClick={submit}>
-          Log In
+          open sesame
         </LoginButton>
       </CenteredContainer>
     )

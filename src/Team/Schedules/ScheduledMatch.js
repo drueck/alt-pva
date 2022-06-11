@@ -21,7 +21,7 @@ const Container = styled.div`
     }
   }
 
-  background-color: ${color('lighterGrey')};
+  background-color: ${color('darkModeBlack')};
   padding: 20px;
   margin-bottom: 2px;
 `
@@ -61,13 +61,12 @@ const CheckIn = styled.div`
 
 const CheckInLink = styled.a`
   text-decoration: none;
-  color: ${color('darkGreen')};
-  font-weight: bold;
+  color: ${color('lightGreen')};
 `
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: ${color('mutedBlue')};
+  color: ${color('lightMutedBlue')};
 `
 
 const locationAndCourt = ({ location, court }) => {

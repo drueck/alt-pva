@@ -28,7 +28,7 @@ const Container = styled.div`
       'match-results set-results';
   }
 
-  background-color: ${color('lighterGrey')};
+  background-color: ${color('darkModeBlack')};
   padding: 20px;
   margin-bottom: 2px;
 `
@@ -41,28 +41,12 @@ const Opponent = styled.div`
   grid-area: opponent;
 `
 
-const accentColorNameForResult = (result) =>
-  result === 'Win' ? 'darkGreen' : result === 'Loss' ? 'darkPink' : 'mutedBlue'
-
-const ifWin = ({ result }) =>
-  result === 'Win' &&
-  css`
-    text-decoration: underline;
-  `
-
-const resultStyles = ({ result, theme }) =>
-  css`
-    color: ${color(accentColorNameForResult(result), { theme })};
-  `
-
 const MatchResults = styled.div`
   grid-area: match-results;
 
   @media (min-width: ${breakpoint}) {
     margin-top: 10px;
   }
-
-  ${resultStyles};
 `
 
 const SetResultsContainer = styled.div`
@@ -78,6 +62,7 @@ const SetResultsContainer = styled.div`
 
 const SetResultContainer = styled.div`
   margin-right: 20px;
+  text-align: center;
 
   @media (min-width: ${breakpoint}) {
     margin-right: 0;
@@ -85,14 +70,26 @@ const SetResultContainer = styled.div`
   }
 `
 
+const accentColorNameForResult = (result) =>
+  result === 'Win'
+    ? 'lightGreen'
+    : result === 'Loss'
+    ? 'lightPink'
+    : 'lightMutedBlue'
+
+const resultStyles = ({ result, theme }) =>
+  css`
+    color: ${color(accentColorNameForResult(result), { theme })};
+  `
+
 const Result = styled.span`
-  background-color: white;
   display: inline-block;
-  font-weight: bold;
   min-width: 50px;
   padding: 5px;
   text-align: center;
-  border: 1px solid currentColor;
+  border: 1px solid ${color('darkModeText')};
+
+  ${resultStyles};
 `
 
 const SetResult = ({ setResult, perspective, result }) => (
@@ -104,18 +101,15 @@ const SetResult = ({ setResult, perspective, result }) => (
   </SetResultContainer>
 )
 
-const SetLabel = styled.div`
-  font-weight: bold;
-`
+const SetLabel = styled.div``
 
 const SetScores = styled.div`
   ${resultStyles};
-  ${ifWin};
 `
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: ${color('mutedBlue')};
+  color: ${color('lightMutedBlue')};
 `
 
 const CompletedMatch = ({ match, teamId, divisionSlug }) => {
@@ -145,8 +139,8 @@ const CompletedMatch = ({ match, teamId, divisionSlug }) => {
           />
         ))}
       </SetResultsContainer>
-      <MatchResults result={result}>
-        <Result>{result}</Result> with{' '}
+      <MatchResults>
+        <Result result={result}>{result}</Result> with{' '}
         {matchPointsFromPerspective(setResults, perspective)} match points
       </MatchResults>
     </Container>

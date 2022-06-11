@@ -12,7 +12,7 @@ const formatMatchPoints = (matchPointsString) =>
   Number.parseFloat(matchPointsString).toFixed(1)
 
 const Container = styled.div`
-  background-color: ${color('lighterGrey')};
+  background-color: ${color('darkModeBlack')};
   padding: 20px;
   margin-bottom: 2px;
 `
@@ -26,7 +26,7 @@ const MatchPointsRecord = styled.div``
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: ${color('mutedBlue')};
+  color: ${color('lightMutedBlue')};
 `
 
 const Standing = ({ standing, divisionSlug }) => {

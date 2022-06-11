@@ -7,7 +7,7 @@ export const PrimaryHeading = styled.h1`
 
   a {
     text-decoration: none;
-    color: ${color('mutedBlue')};
+    color: ${color('lightMutedBlue')};
   }
 `
 
