@@ -11,6 +11,7 @@ import { PrimaryHeading } from 'components/Headings'
 import MaintenanceMessage from './MaintenanceMessage'
 import Login from './Login'
 import AuthenticatedRoute from 'components/AuthenticatedRoute'
+import NotFound from 'components/NotFound'
 
 const AppHeader = styled.header`
   width: 100%;
@@ -52,6 +53,9 @@ const App = () => (
             <AuthenticatedRoute path="/division/:slug">
               <Division />
             </AuthenticatedRoute>
+            <Route path="*">
+              <NotFound />
+            </Route>
           </Switch>
         )}
       </Main>
