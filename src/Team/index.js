@@ -13,6 +13,7 @@ import { color } from 'utils/style'
 import Text from 'components/Text'
 import QueryError from 'components/QueryError'
 import ordinal from 'ordinal'
+import NotFound from 'components/NotFound'
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -33,6 +34,7 @@ const Team = () => {
 
   if (loading) return <p>Loading...</p>
   if (error) return <QueryError error={error} />
+  if (!data?.team) return <NotFound />
 
   const {
     team: {
