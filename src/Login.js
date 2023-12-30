@@ -125,7 +125,7 @@ const Login = () => {
           autoFocus
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          onKeyUp={(e) => e.keyCode === 13 && submit()}
+          onKeyUp={(e) => e.key === 'Enter' && submit()}
           disabled={loading}
         />
         {error && <ErrorText>Sorry, wrong password!</ErrorText>}
