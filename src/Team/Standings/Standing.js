@@ -14,7 +14,11 @@ const formatMatchPoints = (matchPointsString) =>
 const Container = styled.div`
   background-color: ${color('darkModeBlack')};
   padding: 20px;
-  margin-bottom: 2px;
+  border-bottom: 2px solid ${color('darkModeBackground')};
+
+  &:last-child {
+    border-bottom: none;
+  }
 `
 
 const TeamName = styled.div`

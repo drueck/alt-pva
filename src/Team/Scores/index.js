@@ -1,8 +1,9 @@
 import React from 'react'
-import { TertiaryHeading } from 'components/Headings'
 import Text from 'components/Text'
 import CompletedMatch from './CompletedMatch'
 import { useParams } from 'react-router-dom'
+import TabBackground from 'components/TabBackground'
+import NoDataCard from 'Team/NoDataCard'
 
 const getMatchDate = (match) => new Date(`${match.date}T${match.time}`)
 
@@ -15,7 +16,6 @@ const Scores = ({ completedMatches, teamId }) => {
 
   return (
     <>
-      <TertiaryHeading>Scores</TertiaryHeading>
       {sortedMatches.length ? (
         sortedMatches.map((match) => (
           <CompletedMatch
@@ -26,7 +26,11 @@ const Scores = ({ completedMatches, teamId }) => {
           />
         ))
       ) : (
-        <Text>There are currently no completed matches for this team.</Text>
+        <TabBackground>
+          <NoDataCard>
+            <Text>There are currently no completed matches for this team.</Text>
+          </NoDataCard>
+        </TabBackground>
       )}
     </>
   )

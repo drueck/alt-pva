@@ -1,8 +1,9 @@
 import React from 'react'
-import { TertiaryHeading } from 'components/Headings'
 import Text from 'components/Text'
 import ScheduledMatch from './ScheduledMatch'
+import TabBackground from 'components/TabBackground'
 import { isToday } from 'utils/calendar'
+import NoDataCard from 'Team/NoDataCard'
 
 const facilityIds = {
   'Delta Park': 2,
@@ -23,7 +24,6 @@ const checkInUrl = ({ date, location }) => {
 
 const Schedules = ({ scheduledMatches, teamId, divisionSlug }) => (
   <>
-    <TertiaryHeading>Schedules</TertiaryHeading>
     {scheduledMatches.length ? (
       scheduledMatches.map((match, i) => (
         <ScheduledMatch
@@ -35,7 +35,11 @@ const Schedules = ({ scheduledMatches, teamId, divisionSlug }) => (
         />
       ))
     ) : (
-      <Text>There are currently no scheduled matches for this team.</Text>
+      <TabBackground>
+        <NoDataCard>
+          <Text>There are currently no scheduled matches for this team.</Text>
+        </NoDataCard>
+      </TabBackground>
     )}
   </>
 )

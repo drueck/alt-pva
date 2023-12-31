@@ -1,19 +1,27 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
 import TEAM_QUERY from './Team.query'
-import { Switch, Route, Link, useParams, useRouteMatch } from 'react-router-dom'
+import {
+  Switch,
+  Route,
+  Link,
+  useParams,
+  useRouteMatch,
+  useLocation,
+} from 'react-router-dom'
 import Schedules from './Schedules'
 import Scores from './Scores'
 import Standings from './Standings'
 import { SecondaryHeading } from 'components/Headings'
 import NavList from 'components/NavList'
-import NavListLink from 'components/NavListLink'
+import NavListTab from 'components/NavListTab'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import Text from 'components/Text'
 import QueryError from 'components/QueryError'
 import ordinal from 'ordinal'
 import NotFound from 'components/NotFound'
+import TabBackground from 'components/TabBackground'
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -21,12 +29,15 @@ const StyledLink = styled(Link)`
 `
 
 const StyledNavList = styled(NavList)`
-  margin-bottom: 32px;
+  border-bottom: 1px solid ${color('darkModeBackground')};
+  margin-top: 2rem;
+  margin-bottom: 0;
 `
 
 const Team = () => {
   const { divisionSlug, teamSlug } = useParams()
   const { url, path } = useRouteMatch()
+  const location = useLocation()
 
   const { loading, error, data } = useQuery(TEAM_QUERY, {
     variables: { divisionSlug, teamSlug },
@@ -61,31 +72,41 @@ const Team = () => {
         {lossesText}.
       </Text>
       <StyledNavList>
-        <NavListLink to={`${url}`} replace>
+        <NavListTab to={`${url}`} current={location.pathname === url} replace>
           Schedules
-        </NavListLink>
-        <NavListLink to={`${url}/scores`} replace>
+        </NavListTab>
+        <NavListTab
+          to={`${url}/scores`}
+          current={location.pathname === `${url}/scores`}
+          replace
+        >
           Scores
-        </NavListLink>
-        <NavListLink to={`${url}/standings`} replace>
+        </NavListTab>
+        <NavListTab
+          to={`${url}/standings`}
+          current={location.pathname === `${url}/standings`}
+          replace
+        >
           Standings
-        </NavListLink>
+        </NavListTab>
       </StyledNavList>
-      <Switch>
-        <Route exact path={`${path}`}>
-          <Schedules
-            scheduledMatches={scheduledMatches}
-            teamId={teamId}
-            divisionSlug={divisionSlug}
-          />
-        </Route>
-        <Route path={`${path}/scores`}>
-          <Scores completedMatches={completedMatches} teamId={teamId} />
-        </Route>
-        <Route path={`${path}/standings`}>
-          <Standings standings={standings} />
-        </Route>
-      </Switch>
+      <TabBackground>
+        <Switch>
+          <Route exact path={`${path}`}>
+            <Schedules
+              scheduledMatches={scheduledMatches}
+              teamId={teamId}
+              divisionSlug={divisionSlug}
+            />
+          </Route>
+          <Route path={`${path}/scores`}>
+            <Scores completedMatches={completedMatches} teamId={teamId} />
+          </Route>
+          <Route path={`${path}/standings`}>
+            <Standings standings={standings} />
+          </Route>
+        </Switch>
+      </TabBackground>
     </>
   )
 }

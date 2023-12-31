@@ -30,7 +30,11 @@ const Container = styled.div`
 
   background-color: ${color('darkModeBlack')};
   padding: 20px;
-  margin-bottom: 2px;
+  border-bottom: 2px solid ${color('darkModeBackground')};
+
+  &:last-child {
+    border-bottom: none;
+  }
 `
 
 const DateTime = styled.div`
@@ -77,10 +81,9 @@ const accentColorNameForResult = (result) =>
     ? 'lightPink'
     : 'lightMutedBlue'
 
-const resultStyles = ({ result, theme }) =>
-  css`
-    color: ${color(accentColorNameForResult(result), { theme })};
-  `
+const resultStyles = ({ result, theme }) => css`
+  color: ${color(accentColorNameForResult(result), { theme })};
+`
 
 const Result = styled.span`
   display: inline-block;

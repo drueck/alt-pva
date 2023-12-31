@@ -1,8 +1,9 @@
 import React from 'react'
-import { TertiaryHeading } from 'components/Headings'
 import Text from 'components/Text'
 import Standing from './Standing'
+import TabBackground from 'components/TabBackground'
 import { useParams } from 'react-router-dom'
+import NoDataCard from 'Team/NoDataCard'
 
 const Standings = ({ standings }) => {
   const { divisionSlug } = useParams()
@@ -23,7 +24,6 @@ const Standings = ({ standings }) => {
 
   return (
     <>
-      <TertiaryHeading>Standings</TertiaryHeading>
       {sortedStandings.length ? (
         sortedStandings.map((standing) => (
           <Standing
@@ -33,7 +33,13 @@ const Standings = ({ standings }) => {
           />
         ))
       ) : (
-        <Text>There are currently no standings for this team's division.</Text>
+        <TabBackground>
+          <NoDataCard>
+            <Text>
+              There are currently no standings for this team's division.
+            </Text>
+          </NoDataCard>
+        </TabBackground>
       )}
     </>
   )
