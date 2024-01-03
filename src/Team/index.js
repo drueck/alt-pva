@@ -30,7 +30,7 @@ const StyledLink = styled(Link)`
 
 const StyledNavList = styled(NavList)`
   border-bottom: 1px solid ${color('darkModeBackground')};
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   margin-bottom: 0;
 `
 
