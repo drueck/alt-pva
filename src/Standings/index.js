@@ -35,9 +35,7 @@ const Standings = ({ standings }) => {
       ) : (
         <TabBackground>
           <NoDataCard>
-            <Text>
-              There are currently no standings for this team's division.
-            </Text>
+            <Text>There are currently no standings for this division.</Text>
           </NoDataCard>
         </TabBackground>
       )}

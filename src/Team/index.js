@@ -11,7 +11,7 @@ import {
 } from 'react-router-dom'
 import Schedules from './Schedules'
 import Scores from './Scores'
-import Standings from './Standings'
+import Standings from '../Standings'
 import { SecondaryHeading } from 'components/Headings'
 import NavList from 'components/NavList'
 import NavListTab from 'components/NavListTab'
@@ -30,7 +30,7 @@ const StyledLink = styled(Link)`
 
 const StyledNavList = styled(NavList)`
   border-bottom: 1px solid ${color('darkModeBackground')};
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-bottom: 0;
 `
 
