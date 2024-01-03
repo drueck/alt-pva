@@ -1,19 +1,37 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import styled from '@emotion/styled'
+import { color } from 'utils/style'
+import {
+  Switch,
+  Route,
+  useParams,
+  useRouteMatch,
+  useLocation,
+} from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import DIVISION_QUERY from './Division.query'
 import { SecondaryHeading } from 'components/Headings'
 import NavList from 'components/NavList'
-import NavListLink from 'components/NavListLink'
-import TeamNameWithRank from 'components/TeamNameWithRank'
+import NavListTab from 'components/NavListTab'
+import TabBackground from 'components/TabBackground'
+import Teams from './Teams'
+import Standings from '../Standings'
 import QueryError from 'components/QueryError'
 import NotFound from 'components/NotFound'
 
+const TabbedNavList = styled(NavList)`
+  border-bottom: 1px solid ${color('darkModeBackground')};
+  margin-top: 1rem;
+  margin-bottom: 0;
+`
+
 const Division = () => {
-  const { slug } = useParams()
+  const { divisionSlug } = useParams()
+  const { url, path } = useRouteMatch()
+  const location = useLocation()
 
   const { loading, error, data } = useQuery(DIVISION_QUERY, {
-    variables: { slug },
+    variables: { slug: divisionSlug },
   })
 
   if (loading) return <p>Loading...</p>
@@ -21,33 +39,34 @@ const Division = () => {
   if (!data?.division) return <NotFound />
 
   const {
-    division: { name: divisionName, slug: divisionSlug, teams },
+    division: { name: divisionName, teams, standings },
   } = data
-
-  const sortedTeams = teams.slice(0).sort((a, b) => {
-    const rankResult = a.rank - b.rank
-    if (rankResult !== 0) {
-      return rankResult
-    }
-    if (a.name < b.name) {
-      return -1
-    }
-    if (a.name > b.name) {
-      return 1
-    }
-    return 0
-  })
 
   return (
     <>
       <SecondaryHeading>{divisionName}</SecondaryHeading>
-      <NavList>
-        {sortedTeams.map(({ id, name, slug, rank }) => (
-          <NavListLink key={id} to={`/division/${divisionSlug}/team/${slug}`}>
-            <TeamNameWithRank name={name} rank={rank} />
-          </NavListLink>
-        ))}
-      </NavList>
+      <TabbedNavList>
+        <NavListTab to={url} current={location.pathname === url} replace>
+          Teams
+        </NavListTab>
+        <NavListTab
+          to={`${url}/standings`}
+          current={location.pathname === `${url}/standings`}
+          replace
+        >
+          Standings
+        </NavListTab>
+      </TabbedNavList>
+      <TabBackground>
+        <Switch>
+          <Route exact path={path}>
+            <Teams teams={teams} divisionSlug={divisionSlug} />
+          </Route>
+          <Route path={`${path}/standings`}>
+            <Standings standings={standings} />
+          </Route>
+        </Switch>
+      </TabBackground>
     </>
   )
 }

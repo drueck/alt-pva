@@ -12,6 +12,35 @@ const DIVISION_QUERY = gql`
         slug
         rank
       }
+      standings {
+        id
+        team {
+          id
+          name
+          slug
+        }
+        division {
+          id
+          name
+          slug
+        }
+        wins
+        losses
+        matchPoints
+        matchPointsPossible
+        matchPointsPercentage
+        winningPercentage
+        rank
+        rankReason {
+          id
+          statistic
+          lowerTeam {
+            name
+          }
+          teamValue
+          lowerTeamValue
+        }
+      }
     }
   }
 `

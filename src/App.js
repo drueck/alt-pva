@@ -50,7 +50,7 @@ const App = () => (
             <AuthenticatedRoute path="/division/:divisionSlug/team/:teamSlug">
               <Team />
             </AuthenticatedRoute>
-            <AuthenticatedRoute path="/division/:slug">
+            <AuthenticatedRoute path="/division/:divisionSlug">
               <Division />
             </AuthenticatedRoute>
             <Route path="*">
