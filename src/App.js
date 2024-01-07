@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import DivisionsList from './DivisionsList'
+import Home from './Home'
 import Division from './Division'
 import Team from './Team'
 import styled from '@emotion/styled'
@@ -45,7 +45,7 @@ const App = () => (
               <Login />
             </Route>
             <AuthenticatedRoute exact path="/">
-              <DivisionsList />
+              <Home />
             </AuthenticatedRoute>
             <AuthenticatedRoute path="/division/:divisionSlug/team/:teamSlug">
               <Team />

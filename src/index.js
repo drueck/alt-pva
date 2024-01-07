@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import { AuthenticationProvider } from 'components/AuthenticationContext'
+import { FavoritesProvider } from 'components/FavoritesContext'
 import Apollo from 'components/Apollo'
 
 // There seems to be a bug in Apollo Client or something related when
@@ -28,11 +29,13 @@ import Apollo from 'components/Apollo'
 
 ReactDOM.render(
   <AuthenticationProvider>
-    <Apollo>
-      <App />
-    </Apollo>
+    <FavoritesProvider>
+      <Apollo>
+        <App />
+      </Apollo>
+    </FavoritesProvider>
   </AuthenticationProvider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 )
 
 // If you want your app to work offline and load faster, you can change

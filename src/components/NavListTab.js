@@ -4,17 +4,13 @@ import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import { Link } from 'react-router-dom'
 
-const NavListTab = ({ to, replace = false, children, ...props }) => {
-  console.log(props)
-
-  return (
-    <li {...props}>
-      <Link to={to} replace={replace}>
-        {children}
-      </Link>
-    </li>
-  )
-}
+const NavListTab = ({ to, replace = false, children, current, ...props }) => (
+  <li {...props}>
+    <Link to={to} replace={replace}>
+      {children}
+    </Link>
+  </li>
+)
 
 const activeStyle = (props) =>
   props.current &&
@@ -30,7 +26,7 @@ const StyledNavListTab = styled(NavListTab)`
   display: inline-block;
   border: 1px solid ${color('darkModeBackground')};
 
-  &:nth-child(1) {
+  &:nth-of-type(1) {
     border-left: none;
   }
 

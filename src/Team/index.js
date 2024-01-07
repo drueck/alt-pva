@@ -22,16 +22,28 @@ import QueryError from 'components/QueryError'
 import ordinal from 'ordinal'
 import NotFound from 'components/NotFound'
 import TabBackground from 'components/TabBackground'
+import FavoriteButton from 'components/FavoriteButton'
 
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: ${color('lightMutedBlue')};
 `
 
-const StyledNavList = styled(NavList)`
+const TabNavList = styled(NavList)`
   border-bottom: 1px solid ${color('darkModeBackground')};
   margin-top: 1.5rem;
   margin-bottom: 0;
+`
+
+const HeadingContainer = styled.div`
+  padding: 0 1em;
+  display: flex;
+  align-items: center;
+`
+
+const TeamNameHeading = styled(SecondaryHeading)`
+  display: inline-block;
+  padding-left: 1rem;
 `
 
 const Team = () => {
@@ -59,19 +71,24 @@ const Team = () => {
     },
   } = data
 
+  const favoriteData = { teamName, divisionName, teamSlug, divisionSlug }
+
   const winsText = record.wins === 1 ? 'win' : 'wins'
   const lossesText = record.losses === 1 ? 'loss' : 'losses'
 
   return (
     <>
-      <SecondaryHeading>{teamName}</SecondaryHeading>
+      <HeadingContainer>
+        <FavoriteButton favoriteData={favoriteData} />
+        <TeamNameHeading>{teamName}</TeamNameHeading>
+      </HeadingContainer>
       <Text>
         Currently in {ordinal(rank)} place in{' '}
         <StyledLink to={`/division/${divisionSlug}`}>{divisionName}</StyledLink>{' '}
         with a record of {record.wins} {winsText} and {record.losses}{' '}
         {lossesText}.
       </Text>
-      <StyledNavList>
+      <TabNavList>
         <NavListTab to={`${url}`} current={location.pathname === url} replace>
           Schedules
         </NavListTab>
@@ -89,7 +106,7 @@ const Team = () => {
         >
           Standings
         </NavListTab>
-      </StyledNavList>
+      </TabNavList>
       <TabBackground>
         <Switch>
           <Route exact path={`${path}`}>

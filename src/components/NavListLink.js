@@ -13,8 +13,12 @@ const NavListLink = ({ to, replace = false, children, ...props }) => (
 
 const StyledNavListLink = styled(NavListLink)`
   list-style: none;
-  background-color: ${color('darkModeBlack')};
-  margin-bottom: 2px;
+  margin-bottom: 0;
+  border-bottom: 1px solid ${color('darkModeBackground')};
+
+  &:last-child {
+    border-bottom: none;
+  }
 
   a {
     text-decoration: none;
