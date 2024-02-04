@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import NavList from 'components/NavList'
-import NavListLink from 'components/NavListLink'
 import Text from 'components/Text'
 import FavoritesContext from 'components/FavoritesContext'
 import SectionBackground from 'components/SectionBackground'
+import Favorite from './Favorite'
 
 const FavoritesList = () => {
   const { favorites } = useContext(FavoritesContext)
@@ -11,13 +11,8 @@ const FavoritesList = () => {
   return favorites.length ? (
     <SectionBackground>
       <NavList>
-        {favorites.map(({ teamName, divisionSlug, teamSlug, divisionName }) => (
-          <NavListLink
-            key={`/division/${divisionSlug}/team/${teamSlug}`}
-            to={`/division/${divisionSlug}/team/${teamSlug}`}
-          >
-            {teamName} ({divisionName})
-          </NavListLink>
+        {favorites.map((favorite) => (
+          <Favorite favorite={favorite} />
         ))}
       </NavList>
     </SectionBackground>

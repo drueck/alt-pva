@@ -1,6 +1,7 @@
 import React from 'react'
 import NavList from 'components/NavList'
 import NavListLink from 'components/NavListLink'
+import NavListItem from 'components/NavListItem'
 
 const Teams = ({ divisionSlug, teams }) => {
   const sortedTeams = teams.slice(0).sort((a, b) => {
@@ -16,9 +17,11 @@ const Teams = ({ divisionSlug, teams }) => {
   return (
     <NavList>
       {sortedTeams.map(({ id, name, slug }) => (
-        <NavListLink key={id} to={`/division/${divisionSlug}/team/${slug}`}>
-          {name}
-        </NavListLink>
+        <NavListItem>
+          <NavListLink key={id} to={`/division/${divisionSlug}/team/${slug}`}>
+            {name}
+          </NavListLink>
+        </NavListItem>
       ))}
     </NavList>
   )

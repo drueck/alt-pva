@@ -1,5 +1,6 @@
 import React from 'react'
 import NavList from 'components/NavList'
+import NavListItem from 'components/NavListItem'
 import NavListLink from 'components/NavListLink'
 import Text from 'components/Text'
 import SectionBackground from 'components/SectionBackground'
@@ -9,9 +10,11 @@ const DivisionsList = ({ divisions }) =>
     <SectionBackground>
       <NavList>
         {divisions.map(({ id, slug, name }) => (
-          <NavListLink key={id} to={`/division/${slug}`}>
-            {name}
-          </NavListLink>
+          <NavListItem>
+            <NavListLink key={id} to={`/division/${slug}`}>
+              {name}
+            </NavListLink>
+          </NavListItem>
         ))}
       </NavList>
     </SectionBackground>
