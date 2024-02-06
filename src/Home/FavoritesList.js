@@ -12,7 +12,7 @@ const FavoritesList = () => {
     <SectionBackground>
       <NavList>
         {favorites.map((favorite) => (
-          <Favorite favorite={favorite} />
+          <Favorite key={favorite} favorite={favorite} />
         ))}
       </NavList>
     </SectionBackground>
