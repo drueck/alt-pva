@@ -10,10 +10,8 @@ const DivisionsList = ({ divisions }) =>
     <SectionBackground>
       <NavList>
         {divisions.map(({ id, slug, name }) => (
-          <NavListItem>
-            <NavListLink key={id} to={`/division/${slug}`}>
-              {name}
-            </NavListLink>
+          <NavListItem key={id}>
+            <NavListLink to={`/division/${slug}`}>{name}</NavListLink>
           </NavListItem>
         ))}
       </NavList>
