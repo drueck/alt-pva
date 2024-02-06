@@ -1,24 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import { formatDate, formatTime } from 'utils/calendar'
 import { Link } from 'react-router-dom'
+import MoreButton from 'components/MoreButton'
 
 const Container = styled.div`
   display: grid;
   grid-template-areas:
-    'datetime'
-    'opponent'
-    'location'
-    'ref'
-    'checkin';
+    'datetime more'
+    'opponent more'
+    'location more'
+    'ref more';
 
-  @media(min-width: 768px) {
+  grid-template-columns: 1fr auto;
+
+  @media (min-width: 768px) {
     grid-template-areas:
-      'datetime location'
-      'opponent ref'
-      'checkin checkin';
-    }
+      'datetime location more'
+      'opponent ref more';
+
+    grid-template-columns: 1fr 1fr auto;
+    column-gap: 1rem;
   }
 
   background-color: ${color('darkModeBlack')};
@@ -28,6 +31,11 @@ const Container = styled.div`
   &:last-child {
     border-bottom: none;
   }
+`
+
+const Details = styled.div`
+  height: 200px;
+  padding: 1rem;
 `
 
 const DateTime = styled.div`
@@ -58,14 +66,8 @@ const Ref = styled.div`
   }
 `
 
-const CheckIn = styled.div`
-  grid-area: checkin;
-  padding-top: 1em;
-`
-
-const CheckInLink = styled.a`
-  text-decoration: none;
-  color: ${color('lightGreen')};
+const More = styled.div`
+  grid-area: more;
 `
 
 const StyledLink = styled(Link)`
@@ -89,32 +91,32 @@ const ScheduledMatch = ({ match, teamId, divisionSlug, checkInUrl }) => {
   const opponentRecord = ` (${opponent.record.wins}-${opponent.record.losses})`
   const vsOrAt = homeTeam.id === teamId ? 'vs.' : 'at'
 
+  const [expanded, setExpanded] = useState(false)
+
   return (
-    <Container>
-      <DateTime>
-        {formatDate(date)} at {formatTime(time)}
-      </DateTime>
-      <Opponent>
-        {vsOrAt}{' '}
-        <StyledLink to={`/division/${divisionSlug}/team/${opponent.slug}`}>
-          {opponent.name}
-        </StyledLink>
-        {opponentRecord}
-      </Opponent>
-      <Location>{locationAndCourt(match)}</Location>
-      <Ref>Ref: {ref || 'None'}</Ref>
-      {checkInUrl && (
-        <CheckIn>
-          <CheckInLink
-            href={checkInUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Check In
-          </CheckInLink>
-        </CheckIn>
-      )}
-    </Container>
+    <>
+      <Container>
+        <DateTime>
+          {formatDate(date)} at {formatTime(time)}
+        </DateTime>
+        <Opponent>
+          {vsOrAt}{' '}
+          <StyledLink to={`/division/${divisionSlug}/team/${opponent.slug}`}>
+            {opponent.name}
+          </StyledLink>
+          {opponentRecord}
+        </Opponent>
+        <Location>{locationAndCourt(match)}</Location>
+        <Ref>Ref: {ref || 'None'}</Ref>
+        <More>
+          <MoreButton
+            expanded={expanded}
+            toggleExpanded={() => setExpanded(!expanded)}
+          />
+        </More>
+      </Container>
+      {expanded ? <Details>Some more details about this match.</Details> : null}
+    </>
   )
 }
 
