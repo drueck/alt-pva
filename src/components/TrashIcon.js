@@ -12,10 +12,10 @@ const TrashIcon = ({
     viewBox="0 0 24 24"
     fill={fillColor}
     stroke={strokeColor}
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    class="feather feather-trash-2"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="feather feather-trash-2"
   >
     <title>{title}</title>
     <polyline points="3 6 5 6 21 6"></polyline>
