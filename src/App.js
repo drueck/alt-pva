@@ -25,7 +25,7 @@ const Main = styled.main`
   margin: 0 auto 50px;
 `
 
-const maintenanceMode = false
+const maintenanceMode = true
 
 const App = () => (
   <ThemeProvider theme={theme}>
