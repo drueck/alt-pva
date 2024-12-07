@@ -4,11 +4,7 @@ import CompletedMatch from './CompletedMatch'
 import { useParams } from 'react-router-dom'
 import TabBackground from 'components/TabBackground'
 import NoDataCard from 'Team/NoDataCard'
-
-const getMatchDate = (match) => new Date(`${match.date}T${match.time}`)
-
-const compareMatchDatesDesc = (matchA, matchB) =>
-  getMatchDate(matchB) - getMatchDate(matchA)
+import { compareMatchDatesDesc } from 'utils/matches'
 
 const Scores = ({ completedMatches, teamId }) => {
   const { divisionSlug } = useParams()

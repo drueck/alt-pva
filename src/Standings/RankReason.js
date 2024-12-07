@@ -9,11 +9,14 @@ const obviousReasons = [
 
 const Details = styled.details`
   margin-top: 1rem;
+
+  summary {
+    cursor: pointer;
+  }
 `
 
 const SummaryContent = styled.span`
   padding-left: 0.5rem;
-  cursor: default;
 `
 
 const TieBreaker = styled.p`

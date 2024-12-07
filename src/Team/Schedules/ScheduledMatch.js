@@ -4,6 +4,7 @@ import { color } from 'utils/style'
 import { formatDate, formatTime } from 'utils/calendar'
 import { Link } from 'react-router-dom'
 import MoreButton from 'components/MoreButton'
+import ExtraDetails from './ExtraDetails'
 
 const Container = styled.div`
   display: grid;
@@ -11,14 +12,16 @@ const Container = styled.div`
     'datetime more'
     'opponent more'
     'location more'
-    'ref more';
+    'ref more'
+    'extra extra';
 
   grid-template-columns: 1fr auto;
 
   @media (min-width: 768px) {
     grid-template-areas:
       'datetime location more'
-      'opponent ref more';
+      'opponent ref more'
+      'extra extra extra';
 
     grid-template-columns: 1fr 1fr auto;
     column-gap: 1rem;
@@ -31,11 +34,6 @@ const Container = styled.div`
   &:last-child {
     border-bottom: none;
   }
-`
-
-const Details = styled.div`
-  height: 200px;
-  padding: 1rem;
 `
 
 const DateTime = styled.div`
@@ -68,6 +66,10 @@ const Ref = styled.div`
 
 const More = styled.div`
   grid-area: more;
+`
+
+const Extra = styled.div`
+  grid-area: extra;
 `
 
 const StyledLink = styled(Link)`
@@ -114,8 +116,8 @@ const ScheduledMatch = ({ match, teamId, divisionSlug, checkInUrl }) => {
             toggleExpanded={() => setExpanded(!expanded)}
           />
         </More>
+        <Extra>{expanded ? <ExtraDetails match={match} /> : null}</Extra>
       </Container>
-      {expanded ? <Details>Some more details about this match.</Details> : null}
     </>
   )
 }
