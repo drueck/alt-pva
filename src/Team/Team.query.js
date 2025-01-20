@@ -25,10 +25,8 @@ const TEAM_QUERY = gql`
           }
           wins
           losses
-          matchPoints
-          matchPointsPossible
-          matchPointsPercentage
           winningPercentage
+          averagePointDifferential
           rank
           rankReason {
             id
@@ -45,9 +43,6 @@ const TEAM_QUERY = gql`
         id
         wins
         losses
-        matchPoints
-        matchPointsPossible
-        matchPointsPercentage
         winningPercentage
       }
       scheduledMatches {
@@ -82,9 +77,8 @@ const TEAM_QUERY = gql`
             losses
           }
         }
-        location
-        court
-        ref
+        locationName
+        locationUrl
       }
       completedMatches {
         id

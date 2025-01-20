@@ -2,8 +2,8 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 const obviousReasons = [
-  'win percentage',
-  'percentage of possible match points',
+  'winning percentage',
+  'average points differential',
   'team name',
 ]
 

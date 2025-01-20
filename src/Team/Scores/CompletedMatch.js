@@ -8,8 +8,10 @@ import {
   formatScoreFromPerspective,
   setResultFromPerspective,
   matchResultFromPerspective,
-  matchPointsFromPerspective,
+  pointDifferentialFromPerspective,
 } from 'utils/scores'
+
+const formatPointDifferential = (value) => (value > 0 ? '+' : '') + value
 
 const breakpoint = '615px'
 
@@ -143,8 +145,10 @@ const CompletedMatch = ({ match, teamId, divisionSlug }) => {
         ))}
       </SetResultsContainer>
       <MatchResults>
-        <Result result={result}>{result}</Result> with{' '}
-        {matchPointsFromPerspective(setResults, perspective)} match points
+        <Result result={result}>{result}</Result> with a point differential of{' '}
+        {formatPointDifferential(
+          pointDifferentialFromPerspective(setResults, perspective)
+        )}
       </MatchResults>
     </Container>
   )

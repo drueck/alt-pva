@@ -26,10 +26,8 @@ const DIVISION_QUERY = gql`
         }
         wins
         losses
-        matchPoints
-        matchPointsPossible
-        matchPointsPercentage
         winningPercentage
+        averagePointDifferential
         rank
         rankReason {
           id

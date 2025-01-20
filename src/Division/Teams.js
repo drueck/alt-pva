@@ -17,7 +17,7 @@ const Teams = ({ divisionSlug, teams }) => {
   return (
     <NavList>
       {sortedTeams.map(({ id, name, slug }) => (
-        <NavListItem>
+        <NavListItem key={id}>
           <NavListLink key={id} to={`/division/${divisionSlug}/team/${slug}`}>
             {name}
           </NavListLink>

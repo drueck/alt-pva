@@ -8,8 +8,8 @@ import RankReason from './RankReason'
 const formatPercentage = (percentageString) =>
   Number.parseFloat(percentageString).toFixed(2)
 
-const formatMatchPoints = (matchPointsString) =>
-  Number.parseFloat(matchPointsString).toFixed(1)
+const formatPointDifferential = (value) =>
+  (value > 0 ? '+' : '') + Number.parseFloat(value).toFixed(2)
 
 const Container = styled.div`
   background-color: ${color('darkModeBlack')};
@@ -26,7 +26,8 @@ const TeamName = styled.div`
   margin-bottom: 1em;
 `
 const WinLossRecord = styled.div``
-const MatchPointsRecord = styled.div``
+
+const AveragePointDifferential = styled.div``
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -39,9 +40,7 @@ const Standing = ({ standing, divisionSlug }) => {
     wins,
     losses,
     winningPercentage,
-    matchPoints,
-    matchPointsPossible,
-    matchPointsPercentage,
+    averagePointDifferential,
     rank,
     rankReason,
   } = standing
@@ -56,11 +55,10 @@ const Standing = ({ standing, divisionSlug }) => {
         Wins: {wins}, Losses: {losses} ({formatPercentage(winningPercentage)}
         %)
       </WinLossRecord>
-      <MatchPointsRecord>
-        Match Points: {formatMatchPoints(matchPoints)}/
-        {formatMatchPoints(matchPointsPossible)} (
-        {formatPercentage(matchPointsPercentage)}%)
-      </MatchPointsRecord>
+      <AveragePointDifferential>
+        Average Point Differential:{' '}
+        {formatPointDifferential(averagePointDifferential)}
+      </AveragePointDifferential>
       {rankReason && <RankReason name={name} rankReason={rankReason} />}
     </Container>
   )
