@@ -22,6 +22,11 @@ const checkInUrl = ({ date, location }) => {
   return undefined
 }
 
+const parseNaiveDate = (dateString) => {
+  const [year, month, day] = dateString.split('-').map(Number)
+  return new Date(year, month - 1, day)
+}
+
 const Schedules = ({ scheduledMatches, teamId, divisionSlug }) => {
   const [futureMatches, setFutureMatches] = useState([])
 
@@ -31,7 +36,7 @@ const Schedules = ({ scheduledMatches, teamId, divisionSlug }) => {
 
     setFutureMatches(
       scheduledMatches.filter(
-        ({ date: matchDate }) => new Date(matchDate) >= today
+        ({ date: matchDate }) => parseNaiveDate(matchDate) >= today
       )
     )
   }, [scheduledMatches])
