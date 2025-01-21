@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import { formatDate, formatTime } from 'utils/calendar'
-import { Link } from 'react-router-dom'
+import MapIcon from 'components/MapIcon'
 
 const Container = styled.div`
   display: grid;
@@ -37,9 +38,11 @@ const DateTime = styled.div`
 const Location = styled.div`
   grid-area: location;
   text-align: left;
+  margin-top: 1rem;
 
   @media (min-width: 768px) {
     text-align: right;
+    margin-top: unset;
   }
 `
 
@@ -60,7 +63,19 @@ const CheckInLink = styled.a`
 
 const LocationLink = styled.a`
   text-decoration: none;
-  color: ${color('lightMutedBlue')};
+  color: ${color('lightGreen')};
+  display: flex;
+  column-gap: 0.5rem;
+  justify-content: flex-start;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    justify-content: flex-end;
+  }
+`
+
+const LocationName = styled.span`
+  display: inline-block;
 `
 
 const StyledLink = styled(Link)`
@@ -93,7 +108,8 @@ const ScheduledMatch = ({ match, teamId, divisionSlug, checkInUrl }) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {locationName}
+          <MapIcon strokeColor="currentColor" size="1rem" />
+          <LocationName>{locationName}</LocationName>
         </LocationLink>
       </Location>
       {checkInUrl && (
