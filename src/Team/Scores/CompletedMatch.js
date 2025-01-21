@@ -145,7 +145,7 @@ const CompletedMatch = ({ match, teamId, divisionSlug }) => {
         ))}
       </SetResultsContainer>
       <MatchResults>
-        <Result result={result}>{result}</Result> with a point differential of{' '}
+        <Result result={result}>{result}</Result> point differential:{' '}
         {formatPointDifferential(
           pointDifferentialFromPerspective(setResults, perspective)
         )}
