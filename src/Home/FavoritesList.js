@@ -5,6 +5,9 @@ import FavoritesContext from 'components/FavoritesContext'
 import SectionBackground from 'components/SectionBackground'
 import Favorite from './Favorite'
 
+const favoriteKey = ({ divisionSlug, teamSlug }) =>
+  `${divisionSlug}-${teamSlug}`
+
 const FavoritesList = () => {
   const { favorites } = useContext(FavoritesContext)
 
@@ -12,7 +15,7 @@ const FavoritesList = () => {
     <SectionBackground>
       <NavList>
         {favorites.map((favorite) => (
-          <Favorite key={favorite} favorite={favorite} />
+          <Favorite key={favoriteKey(favorite)} favorite={favorite} />
         ))}
       </NavList>
     </SectionBackground>
