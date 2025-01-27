@@ -34,11 +34,13 @@ const Schedules = ({ scheduledMatches, teamId, divisionSlug }) => {
     const today = new Date()
     today.setHours(0, 0, 0, 0)
 
-    setFutureMatches(
-      scheduledMatches.filter(
-        ({ date: matchDate }) => parseNaiveDate(matchDate) >= today
+    if (scheduledMatches) {
+      setFutureMatches(
+        scheduledMatches.filter(({ date: matchDate }) => {
+          return parseNaiveDate(matchDate || '1970-01-01') >= today
+        })
       )
-    )
+    }
   }, [scheduledMatches])
 
   return (
