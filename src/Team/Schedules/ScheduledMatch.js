@@ -113,11 +113,7 @@ const ScheduledMatch = ({ match, teamId, divisionSlug, checkInUrl }) => {
         {opponentRecord}
       </Opponent>
       <Location>
-        <LocationLink
-          href={locationUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <LocationLink href={locationUrl}>
           <MapIcon strokeColor="currentColor" size="1rem" />
           <LocationName>{locationName}</LocationName>
         </LocationLink>
