@@ -79,6 +79,7 @@ const TEAM_QUERY = gql`
         }
         locationName
         locationUrl
+        ref
       }
       completedMatches {
         id

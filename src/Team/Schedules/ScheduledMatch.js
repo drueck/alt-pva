@@ -11,12 +11,13 @@ const Container = styled.div`
     'datetime'
     'opponent'
     'location'
+    'ref'
     'checkin';
 
   @media(min-width: 768px) {
     grid-template-areas:
       'datetime location'
-      'opponent opponent'
+      'opponent ref'
       'checkin checkin';
     }
   }
@@ -43,6 +44,15 @@ const Location = styled.div`
   @media (min-width: 768px) {
     text-align: right;
     margin-top: unset;
+  }
+`
+
+const Ref = styled.div`
+  grid-area: ref;
+  text-align: left;
+
+  @media (min-width: 768px) {
+    text-align: right;
   }
 `
 
@@ -84,7 +94,7 @@ const StyledLink = styled(Link)`
 `
 
 const ScheduledMatch = ({ match, teamId, divisionSlug, checkInUrl }) => {
-  const { date, time, homeTeam, visitingTeam, locationName, locationUrl } =
+  const { date, time, homeTeam, visitingTeam, locationName, locationUrl, ref } =
     match
   const opponent = homeTeam.id === teamId ? visitingTeam : homeTeam
   const opponentRecord = ` (${opponent.record.wins}-${opponent.record.losses})`
@@ -112,6 +122,7 @@ const ScheduledMatch = ({ match, teamId, divisionSlug, checkInUrl }) => {
           <LocationName>{locationName}</LocationName>
         </LocationLink>
       </Location>
+      <Ref>{ref ? ref : 'No Ref'}</Ref>
       {checkInUrl && (
         <CheckIn>
           <CheckInLink
