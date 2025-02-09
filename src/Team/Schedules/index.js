@@ -29,6 +29,7 @@ const parseNaiveDate = (dateString) => {
 
 const Schedules = ({ scheduledMatches, teamId, divisionSlug }) => {
   const [futureMatches, setFutureMatches] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const today = new Date()
@@ -40,8 +41,13 @@ const Schedules = ({ scheduledMatches, teamId, divisionSlug }) => {
           return parseNaiveDate(matchDate || '1970-01-01') >= today
         })
       )
+      setLoading(false)
     }
   }, [scheduledMatches])
+
+  if (loading) {
+    return null
+  }
 
   return (
     <>
