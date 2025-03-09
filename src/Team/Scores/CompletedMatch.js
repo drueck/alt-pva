@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import { formatDate, formatTime } from 'utils/calendar'
 import { Link } from 'react-router-dom'
-import { css } from '@emotion/core'
+import { css } from '@emotion/react'
 import {
   formatScoreFromPerspective,
   setResultFromPerspective,

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 
 const NavListLink = styled(Link)`
   text-decoration: none;
-  color: black;
   height: 100%;
   padding: 20px;
   display: block;

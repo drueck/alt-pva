@@ -9,3 +9,8 @@ export const curry = (fn) => {
 
   return curried
 }
+
+export const compose =
+  (...fns) =>
+  (value) =>
+    fns.reduce((acc, fn) => fn(acc), value)

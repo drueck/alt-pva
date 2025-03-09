@@ -4,22 +4,26 @@ import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import { formatDate, formatTime } from 'utils/calendar'
 import MapIcon from 'components/MapIcon'
+import ContextMenu from './ContextMenu'
 
 const Container = styled.div`
   display: grid;
+  grid-template-columns: 1fr auto;
   grid-template-areas:
-    'datetime'
-    'opponent'
-    'location'
-    'ref'
-    'checkin';
+    'datetime header'
+    'opponent header'
+    'ref header'
+    'location header'
+    'checkin header';
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
+    align-items: start;
+    column-gap: 1rem;
+    grid-template-columns: 1fr auto auto;
     grid-template-areas:
-      'datetime location'
-      'opponent ref'
-      'checkin checkin';
-    }
+      'datetime ref header'
+      'opponent location header'
+      'checkin checkin header';
   }
 
   background-color: ${color('darkModeBlack')};
@@ -31,6 +35,10 @@ const Container = styled.div`
   }
 `
 
+const Header = styled.div`
+  grid-area: header;
+`
+
 const DateTime = styled.div`
   grid-area: datetime;
   text-align: left;
@@ -39,11 +47,10 @@ const DateTime = styled.div`
 const Location = styled.div`
   grid-area: location;
   text-align: left;
-  margin-top: 1rem;
 
   @media (min-width: 768px) {
+    padding-top: unset;
     text-align: right;
-    margin-top: unset;
   }
 `
 
@@ -102,6 +109,9 @@ const ScheduledMatch = ({ match, teamId, divisionSlug, checkInUrl }) => {
 
   return (
     <Container>
+      <Header>
+        <ContextMenu teamId={teamId} match={match} />
+      </Header>
       <DateTime>
         {formatDate(date)} at {formatTime(time)}
       </DateTime>

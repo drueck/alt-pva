@@ -1,4 +1,4 @@
-import { css } from '@emotion/core'
+import { css } from '@emotion/react'
 import { curry } from 'utils/fp'
 
 export const theme = {

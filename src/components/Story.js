@@ -1,9 +1,9 @@
 // wrapper for rendering components in storybook stories
 
 import React from 'react'
-import { ThemeProvider } from 'emotion-theming'
+import { ThemeProvider } from '@emotion/react'
 import { theme, globalStyles } from 'utils/style'
-import { Global } from '@emotion/core'
+import { Global } from '@emotion/react'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 const Story = ({ children }) => (
