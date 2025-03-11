@@ -29,7 +29,7 @@ const TeamLink = styled(Link)`
   color: ${color('lightMutedBlue')};
 `
 
-const TeamList = ({ teams, beforeOrAfter }) => {
+const TeamList = ({ teams, beforeOrAfter, close }) => {
   if (!teams.length) return null
 
   return (
@@ -38,7 +38,11 @@ const TeamList = ({ teams, beforeOrAfter }) => {
       <StyledList>
         {teams.map(({ id, name, slug, division }) => (
           <li key={id}>
-            <TeamLink key={id} to={`/division/${division.slug}/team/${slug}`}>
+            <TeamLink
+              key={id}
+              to={`/division/${division.slug}/team/${slug}`}
+              onClick={close}
+            >
               {name} ({simpleDivision(division.name)})
             </TeamLink>
           </li>

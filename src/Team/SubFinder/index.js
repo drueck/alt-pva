@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useImperativeHandle,
   useRef,
+  useCallback,
 } from 'react'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
@@ -142,37 +143,37 @@ const SubFinder = React.memo(
 
     useImperativeHandle(ref, () => ({
       showModal: () => {
-        if (modalRef.current) {
+        if (!isOpen && modalRef.current) {
           modalRef.current.showModal()
           setIsOpen(true)
         }
       },
       close: () => {
-        if (modalRef.current) {
+        if (isOpen && modalRef.current) {
           modalRef.current.close()
           setIsOpen(false)
         }
       },
     }))
 
+    const handleClose = useCallback(() => {
+      setIsOpen(false)
+      externalClose?.()
+    }, [externalClose])
+
     useEffect(() => {
       const modal = modalRef.current
-      if (!modal) {
-        return
-      }
-
-      const handleClose = () => {
-        setIsOpen(false)
-        externalClose && externalClose()
-      }
+      if (!modal) return
 
       modal.addEventListener('close', handleClose)
       return () => modal.removeEventListener('close', handleClose)
-    }, [externalClose])
+    }, [handleClose])
+
+    const closeModal = useCallback(() => ref.current?.close(), [ref])
 
     const closeFromEvent = (event) => {
       if (event.target === event.currentTarget) {
-        ref.current.close()
+        closeModal()
       }
     }
 
@@ -183,24 +184,32 @@ const SubFinder = React.memo(
 
     return (
       <>
-        {isOpen && <Overlay onClick={() => ref.current?.close()} />}
+        {isOpen && <Overlay onClick={closeModal} />}
         <Modal ref={modalRef} onClick={closeFromEvent}>
-          {!loading && data && (
+          {!loading && (
             <ModalContent onClick={(e) => e.stopPropagation()}>
               <TitleContainer>
                 <Heading>Sub Finder</Heading>
                 <IconButton
                   aria-label="Close"
                   type="button"
-                  onClick={() => ref.current?.close()}
+                  onClick={closeModal}
                 >
                   <XIcon title="Close" />
                 </IconButton>
               </TitleContainer>
               <ContentContainer>
-                <TeamList teams={before} beforeOrAfter="Before" />
-                <TeamList teams={after} beforeOrAfter="After" />
-                {Boolean(!before.length && !after.length) && (
+                <TeamList
+                  teams={before}
+                  beforeOrAfter="Before"
+                  close={closeModal}
+                />
+                <TeamList
+                  teams={after}
+                  beforeOrAfter="After"
+                  close={closeModal}
+                />
+                {!before.length && !after.length && (
                   <p>
                     Unfortunately it looks like there are no teams playing
                     directly before or after this match at the gym at which this
