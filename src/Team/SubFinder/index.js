@@ -8,11 +8,10 @@ import React, {
 } from 'react'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
-import SUB_FINDER_QUERY from './SubFinder.query'
-import { useQuery } from '@apollo/client'
 import TeamList from './TeamList'
 import XIcon from 'components/XIcon'
 import IconButton from 'components/IconButton'
+import useSubFinder from './useSubFinder'
 
 const Overlay = styled.div`
   position: fixed;
@@ -78,68 +77,11 @@ const Heading = styled.h2`
   margin: 0;
 `
 
-const timeToFloat = (time) => Number(time.slice(0, 4).replace(':', '.'))
-
 const SubFinder = React.memo(
   forwardRef(({ teamId, match, close: externalClose }, ref) => {
     const modalRef = useRef(null)
     const [isOpen, setIsOpen] = useState(false)
-    const [before, setBefore] = useState([])
-    const [after, setAfter] = useState([])
-
-    const { loading, error, data } = useQuery(SUB_FINDER_QUERY, {
-      variables: { date: match.date },
-    })
-
-    useEffect(() => {
-      if (!data) {
-        return
-      }
-
-      const opponentId =
-        match.homeTeam.id === teamId ? match.visitingTeam.id : match.homeTeam.id
-
-      const matchTime = timeToFloat(match.time)
-      const matchTeams = [teamId, opponentId]
-
-      const before = new Set()
-      const after = new Set()
-
-      data.scheduledMatches
-        .filter((otherMatch) => match.locationUrl === otherMatch.locationUrl)
-        .forEach((otherMatch) => {
-          const otherMatchTime = timeToFloat(otherMatch.time)
-          if (matchTime - otherMatchTime === 1) {
-            before.add(otherMatch.homeTeam)
-            before.add(otherMatch.visitingTeam)
-          } else if (otherMatchTime - matchTime === 1) {
-            after.add(otherMatch.homeTeam)
-            after.add(otherMatch.visitingTeam)
-          }
-        })
-
-      for (const team in before) {
-        if (team.id in matchTeams) {
-          before.delete(team)
-        }
-      }
-
-      for (const team in after) {
-        if (team.id in matchTeams) {
-          after.delete(team)
-        }
-      }
-
-      setBefore(Array.from(before))
-      setAfter(Array.from(after))
-    }, [
-      data,
-      match.homeTeam.id,
-      match.visitingTeam.id,
-      match.time,
-      teamId,
-      match.locationUrl,
-    ])
+    const { loading, error, before, after } = useSubFinder(teamId, match)
 
     useImperativeHandle(ref, () => ({
       showModal: () => {
