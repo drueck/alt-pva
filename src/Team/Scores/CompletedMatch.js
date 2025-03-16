@@ -56,6 +56,7 @@ const MatchResults = styled.div`
 `
 
 const SetResultsContainer = styled.div`
+  grid-area: set-results;
   display: flex;
   margin: 10px 0 15px;
 
@@ -106,6 +107,10 @@ const SetResult = ({ setResult, perspective, result }) => (
   </SetResultContainer>
 )
 
+const ForfeitResult = styled.div`
+  ${resultStyles}
+`
+
 const SetLabel = styled.div``
 
 const SetScores = styled.div`
@@ -117,11 +122,20 @@ const StyledLink = styled(Link)`
   color: ${color('lightMutedBlue')};
 `
 
+const matchResultFromForfeit = (forfeitedTeam, opponent) => {
+  if (!forfeitedTeam) return null
+
+  return forfeitedTeam.id === opponent.id ? 'Win' : 'Loss'
+}
+
 const CompletedMatch = ({ match, teamId, divisionSlug }) => {
-  const { date, time, homeTeam, visitingTeam, setResults } = match
+  const { date, time, homeTeam, visitingTeam, forfeitedTeam, setResults } =
+    match
   const perspective = homeTeam.id === teamId ? 'home' : 'visitor'
   const opponent = homeTeam.id === teamId ? visitingTeam : homeTeam
-  const result = matchResultFromPerspective(setResults, perspective)
+  const result =
+    matchResultFromForfeit(forfeitedTeam, opponent) ||
+    matchResultFromPerspective(setResults, perspective)
 
   return (
     <Container>
@@ -135,14 +149,20 @@ const CompletedMatch = ({ match, teamId, divisionSlug }) => {
         </StyledLink>
       </Opponent>
       <SetResultsContainer>
-        {setResults.map((setResult) => (
-          <SetResult
-            key={setResult.setNumber}
-            result={setResultFromPerspective(setResult, perspective)}
-            setResult={setResult}
-            perspective={perspective}
-          />
-        ))}
+        {setResults.length ? (
+          setResults.map((setResult) => (
+            <SetResult
+              key={setResult.setNumber}
+              result={setResultFromPerspective(setResult, perspective)}
+              setResult={setResult}
+              perspective={perspective}
+            />
+          ))
+        ) : (
+          <SetResultsContainer>
+            <ForfeitResult result={result}>FORFEIT</ForfeitResult>
+          </SetResultsContainer>
+        )}
       </SetResultsContainer>
       <MatchResults>
         <Result result={result}>{result}</Result> point differential:{' '}

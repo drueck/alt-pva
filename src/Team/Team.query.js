@@ -103,6 +103,9 @@ const TEAM_QUERY = gql`
             slug
           }
         }
+        forfeitedTeam {
+          id
+        }
         setResults {
           id
           setNumber
