@@ -3,7 +3,7 @@ import Text from 'components/Text'
 import CompletedMatch from './CompletedMatch'
 import { useParams } from 'react-router-dom'
 import TabBackground from 'components/TabBackground'
-import NoDataCard from 'Team/NoDataCard'
+import NoDataCard from '../NoDataCard'
 
 const getMatchDate = (match) => new Date(`${match.date}T${match.time}`)
 

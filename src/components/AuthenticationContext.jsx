@@ -4,11 +4,11 @@ const AuthenticationContext = React.createContext({})
 
 export const AuthenticationProvider = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(
-    !!localStorage.getItem('pvaDataJwt')
+    !!localStorage.getItem('pvaDataJwt'),
   )
 
   const [loginRequired, setLoginRequired] = useState(
-    !localStorage.getItem('pvaDataLoginNotRequired')
+    !localStorage.getItem('pvaDataLoginNotRequired'),
   )
 
   return (

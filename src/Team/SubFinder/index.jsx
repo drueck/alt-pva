@@ -164,7 +164,7 @@ const SubFinder = React.memo(
         </Modal>
       </>
     )
-  })
+  }),
 )
 
 export default SubFinder

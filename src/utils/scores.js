@@ -45,7 +45,7 @@ export const setsWonFromPerspective = (setResults, perspective) =>
     (count, setResult) =>
       count +
       (setResultFromPerspective(setResult, perspective) === 'Win' ? 1 : 0),
-    0
+    0,
   )
 
 const setsLostFromPerspective = (setResults, perspective) =>
@@ -53,7 +53,7 @@ const setsLostFromPerspective = (setResults, perspective) =>
     (count, setResult) =>
       count +
       (setResultFromPerspective(setResult, perspective) === 'Loss' ? 1 : 0),
-    0
+    0,
   )
 
 export const matchResultFromPerspective = (setResults, perspective) => {
@@ -63,7 +63,7 @@ export const matchResultFromPerspective = (setResults, perspective) => {
   if (setsWon === setsLost) {
     return matchResultByPointDifferentialFromPerspective(
       setResults,
-      perspective
+      perspective,
     )
   }
 
@@ -76,16 +76,16 @@ export const pointDifferentialFromPerspective = (setResults, perspective) =>
       diff +
       teamScoreFromPerspective(setResult, perspective) -
       opponentScoreFromPerspective(setResult, perspective),
-    0
+    0,
   )
 
 const matchResultByPointDifferentialFromPerspective = (
   setResults,
-  perspective
+  perspective,
 ) => {
   const pointDifferential = pointDifferentialFromPerspective(
     setResults,
-    perspective
+    perspective,
   )
 
   if (pointDifferential === 0) {
@@ -98,7 +98,7 @@ const matchResultByPointDifferentialFromPerspective = (
 export const opponentNameFromPerspective = (
   homeTeam,
   visitingTeam,
-  perspective
+  perspective,
 ) => (perspective === 'home' ? visitingTeam.name : homeTeam.name)
 
 export const matchPointsFromPerspective = (setResults, perspective) =>

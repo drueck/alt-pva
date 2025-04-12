@@ -52,7 +52,7 @@ const useSubFinder = (teamId, match) => {
 
     const [before, after] = teamsPlayingBeforeAndAfter(
       data.scheduledMatches,
-      match
+      match,
     )
 
     setBefore(before)

@@ -14,7 +14,7 @@ describe('opponentNameFromPerspective', () => {
       const visitingTeam = { name: 'Visitor' }
 
       expect(
-        opponentNameFromPerspective(homeTeam, visitingTeam, 'home')
+        opponentNameFromPerspective(homeTeam, visitingTeam, 'home'),
       ).toEqual('Visitor')
     })
   })
@@ -25,7 +25,7 @@ describe('opponentNameFromPerspective', () => {
       const visitingTeam = { name: 'Visitor' }
 
       expect(
-        opponentNameFromPerspective(homeTeam, visitingTeam, 'visitor')
+        opponentNameFromPerspective(homeTeam, visitingTeam, 'visitor'),
       ).toEqual('Home')
     })
   })
