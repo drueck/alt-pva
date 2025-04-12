@@ -74,13 +74,12 @@ const Login = () => {
 
   const { from } = location.state || { from: { pathname: '/' } }
   const { setAuthenticated, setLoginRequired } = useContext(
-    AuthenticationContext
+    AuthenticationContext,
   )
   const [password, setPassword] = useState('')
 
-  const { loading: loginRequiredLoading, data: loginRequiredData } = useQuery(
-    LOGIN_REQUIRED_QUERY
-  )
+  const { loading: loginRequiredLoading, data: loginRequiredData } =
+    useQuery(LOGIN_REQUIRED_QUERY)
 
   useEffect(() => {
     if (loginRequiredData) {

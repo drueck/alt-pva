@@ -3,7 +3,7 @@ import Text from 'components/Text'
 import ScheduledMatch from './ScheduledMatch'
 import TabBackground from 'components/TabBackground'
 import { isToday } from 'utils/calendar'
-import NoDataCard from 'Team/NoDataCard'
+import NoDataCard from '../NoDataCard'
 
 const facilityIds = {
   'Delta Park': 2,
@@ -39,7 +39,7 @@ const Schedules = ({ scheduledMatches, teamId, divisionSlug }) => {
       setFutureMatches(
         scheduledMatches.filter(({ date: matchDate }) => {
           return parseNaiveDate(matchDate || '1970-01-01') >= today
-        })
+        }),
       )
       setLoading(false)
     }

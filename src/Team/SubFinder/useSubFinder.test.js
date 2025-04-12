@@ -20,7 +20,7 @@ describe('teamsPlayingBeforeAndAfter', () => {
 
     const [before, after] = teamsPlayingBeforeAndAfter(
       testResponse['data']['scheduledMatches'],
-      match
+      match,
     )
 
     const expectedBeforeTeamsNames = [

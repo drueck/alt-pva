@@ -81,8 +81,8 @@ const accentColorNameForResult = (result) =>
   result === 'Win'
     ? 'lightGreen'
     : result === 'Loss'
-    ? 'lightPink'
-    : 'lightMutedBlue'
+      ? 'lightPink'
+      : 'lightMutedBlue'
 
 const resultStyles = ({ result, theme }) => css`
   color: ${color(accentColorNameForResult(result), { theme })};
@@ -167,7 +167,7 @@ const CompletedMatch = ({ match, teamId, divisionSlug }) => {
       <MatchResults>
         <Result result={result}>{result}</Result> point differential:{' '}
         {formatPointDifferential(
-          pointDifferentialFromPerspective(setResults, perspective)
+          pointDifferentialFromPerspective(setResults, perspective),
         )}
       </MatchResults>
     </Container>

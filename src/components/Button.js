@@ -22,7 +22,8 @@ const Button = styled.button`
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
-  transition: background-color var(--transition-speed),
+  transition:
+    background-color var(--transition-speed),
     transform var(--transition-speed);
   outline: none;
 
