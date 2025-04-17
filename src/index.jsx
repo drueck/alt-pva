@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import { AuthenticationProvider } from 'components/AuthenticationContext'
@@ -27,7 +27,9 @@ import Apollo from 'components/Apollo'
 //   document.getElementById('root')
 // )
 
-ReactDOM.render(
+const root = createRoot(document.getElementById('root'))
+
+root.render(
   <AuthenticationProvider>
     <FavoritesProvider>
       <Apollo>
