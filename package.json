@@ -19,8 +19,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "prettier": {
     "semi": false,
@@ -29,15 +29,16 @@
   },
   "devDependencies": {
     "@storybook/addon-actions": "^8.5.6",
-    "@storybook/addon-links": "^8.5.6",
-    "@storybook/addons": "^7.6.17",
-    "@storybook/react": "^8.5.6",
+    "@storybook/addon-essentials": "^8.6.12",
+    "@storybook/react-vite": "^8.6.12",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "@vitejs/plugin-react": "^4.3.4",
     "jsdom": "^26.0.0",
     "prettier": "^3.5.3",
+    "prop-types": "^15.8.1",
+    "storybook": "^8.6.12",
     "vite": "^6.2.6",
     "vitest": "^3.1.1"
   }
