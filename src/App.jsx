@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import Home from './Home'
 import Division from './Division'
 import Team from './Team'
@@ -10,7 +10,7 @@ import { theme, globalStyles, color } from 'utils/style'
 import { PrimaryHeading } from 'components/Headings'
 import MaintenanceMessage from './MaintenanceMessage'
 import Login from './Login'
-import AuthenticatedRoute from 'components/AuthenticatedRoute'
+import RequireAuth from 'components/RequireAuth'
 import NotFound from 'components/NotFound'
 
 const AppHeader = styled.header`
@@ -29,7 +29,7 @@ const maintenanceMode = false
 
 const App = () => (
   <ThemeProvider theme={theme}>
-    <Router>
+    <BrowserRouter>
       <Global styles={globalStyles} />
       <AppHeader>
         <PrimaryHeading>
@@ -40,26 +40,37 @@ const App = () => (
         {maintenanceMode ? (
           <MaintenanceMessage />
         ) : (
-          <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <AuthenticatedRoute exact path="/">
-              <Home />
-            </AuthenticatedRoute>
-            <AuthenticatedRoute path="/division/:divisionSlug/team/:teamSlug">
-              <Team />
-            </AuthenticatedRoute>
-            <AuthenticatedRoute path="/division/:divisionSlug">
-              <Division />
-            </AuthenticatedRoute>
-            <Route path="*">
-              <NotFound />
-            </Route>
-          </Switch>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/"
+              element={
+                <RequireAuth>
+                  <Home />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/division/:divisionSlug/team/:teamSlug/*"
+              element={
+                <RequireAuth>
+                  <Team />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/division/:divisionSlug/*"
+              element={
+                <RequireAuth>
+                  <Division />
+                </RequireAuth>
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         )}
       </Main>
-    </Router>
+    </BrowserRouter>
   </ThemeProvider>
 )
 

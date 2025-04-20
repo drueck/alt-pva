@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import Text from 'components/Text'
@@ -69,7 +69,7 @@ const LOGIN_QUERY = gql`
 `
 
 const Login = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const location = useLocation()
 
   const { from } = location.state || { from: { pathname: '/' } }
@@ -89,10 +89,10 @@ const Login = () => {
       } else {
         localStorage.setItem('pvaDataLoginNotRequired', 'true')
         setLoginRequired(false)
-        history.replace(from)
+        navigate(from, { replace: true })
       }
     }
-  }, [loginRequiredData, setLoginRequired, history, from])
+  }, [loginRequiredData, setLoginRequired, navigate, from])
 
   const [login, { loading, data, error }] = useLazyQuery(LOGIN_QUERY)
 
@@ -102,9 +102,9 @@ const Login = () => {
     if (data) {
       localStorage.setItem('pvaDataJwt', data.login.token)
       setAuthenticated(true)
-      history.replace(from)
+      navigate(from, { replace: true })
     }
-  }, [data, setAuthenticated, history, from])
+  }, [data, setAuthenticated, navigate, from])
 
   useEffect(() => {
     if (error) {

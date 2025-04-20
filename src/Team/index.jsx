@@ -1,14 +1,7 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
 import TEAM_QUERY from './Team.query'
-import {
-  Switch,
-  Route,
-  Link,
-  useParams,
-  useRouteMatch,
-  useLocation,
-} from 'react-router-dom'
+import { Routes, Route, Link, useParams, useMatch } from 'react-router-dom'
 import Schedules from './Schedules'
 import Scores from './Scores'
 import Standings from '../Standings'
@@ -48,8 +41,10 @@ const TeamNameHeading = styled(SecondaryHeading)`
 
 const Team = () => {
   const { divisionSlug, teamSlug } = useParams()
-  const { url, path } = useRouteMatch()
-  const location = useLocation()
+
+  const onSchedulesTab = Boolean(useMatch({ path: '.', end: true }))
+  const onScoresTab = Boolean(useMatch({ path: 'scores', end: true }))
+  const onStandingsTab = Boolean(useMatch({ path: 'standings', end: true }))
 
   const { loading, error, data } = useQuery(TEAM_QUERY, {
     variables: { divisionSlug, teamSlug },
@@ -89,40 +84,39 @@ const Team = () => {
         {lossesText}.
       </Text>
       <TabNavList>
-        <NavListTab to={`${url}`} current={location.pathname === url} replace>
+        <NavListTab to="." replace>
           Schedules
         </NavListTab>
-        <NavListTab
-          to={`${url}/scores`}
-          current={location.pathname === `${url}/scores`}
-          replace
-        >
+        <NavListTab to="scores" replace>
           Scores
         </NavListTab>
-        <NavListTab
-          to={`${url}/standings`}
-          current={location.pathname === `${url}/standings`}
-          replace
-        >
+        <NavListTab to="standings" replace>
           Standings
         </NavListTab>
       </TabNavList>
       <TabBackground>
-        <Switch>
-          <Route exact path={`${path}`}>
-            <Schedules
-              scheduledMatches={scheduledMatches}
-              teamId={teamId}
-              divisionSlug={divisionSlug}
-            />
-          </Route>
-          <Route path={`${path}/scores`}>
-            <Scores completedMatches={completedMatches} teamId={teamId} />
-          </Route>
-          <Route path={`${path}/standings`}>
-            <Standings standings={standings} />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route
+            index
+            element={
+              <Schedules
+                scheduledMatches={scheduledMatches}
+                teamId={teamId}
+                divisionSlug={divisionSlug}
+              />
+            }
+          />
+          <Route
+            path="scores"
+            element={
+              <Scores completedMatches={completedMatches} teamId={teamId} />
+            }
+          />
+          <Route
+            path="standings"
+            element={<Standings standings={standings} />}
+          />
+        </Routes>
       </TabBackground>
     </>
   )

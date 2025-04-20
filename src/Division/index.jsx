@@ -1,13 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
-import {
-  Switch,
-  Route,
-  useParams,
-  useRouteMatch,
-  useLocation,
-} from 'react-router-dom'
+import { Routes, Route, useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import DIVISION_QUERY from './Division.query'
 import { SecondaryHeading } from 'components/Headings'
@@ -27,8 +21,6 @@ const TabbedNavList = styled(NavList)`
 
 const Division = () => {
   const { divisionSlug } = useParams()
-  const { url, path } = useRouteMatch()
-  const location = useLocation()
 
   const { loading, error, data } = useQuery(DIVISION_QUERY, {
     variables: { slug: divisionSlug },
@@ -46,26 +38,24 @@ const Division = () => {
     <>
       <SecondaryHeading>{divisionName}</SecondaryHeading>
       <TabbedNavList>
-        <NavListTab to={url} current={location.pathname === url} replace>
+        <NavListTab to="." replace>
           Teams
         </NavListTab>
-        <NavListTab
-          to={`${url}/standings`}
-          current={location.pathname === `${url}/standings`}
-          replace
-        >
+        <NavListTab to="standings" replace>
           Standings
         </NavListTab>
       </TabbedNavList>
       <TabBackground>
-        <Switch>
-          <Route exact path={path}>
-            <Teams teams={teams} divisionSlug={divisionSlug} />
-          </Route>
-          <Route path={`${path}/standings`}>
-            <Standings standings={standings} />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route
+            index
+            element={<Teams teams={teams} divisionSlug={divisionSlug} />}
+          />
+          <Route
+            path="standings"
+            element={<Standings standings={standings} />}
+          />
+        </Routes>
       </TabBackground>
     </>
   )
