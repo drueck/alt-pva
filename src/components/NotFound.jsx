@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import Text from './Text'

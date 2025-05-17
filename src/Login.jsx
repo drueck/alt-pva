@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
 import Text from 'components/Text'

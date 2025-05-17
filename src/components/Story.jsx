@@ -4,7 +4,7 @@ import React from 'react'
 import { ThemeProvider } from '@emotion/react'
 import { theme, globalStyles } from 'utils/style'
 import { Global } from '@emotion/react'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router'
 
 const Story = ({ children }) => (
   <ThemeProvider theme={theme}>

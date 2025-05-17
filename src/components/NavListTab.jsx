@@ -1,15 +1,23 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router'
+import { css } from '@emotion/react'
 
-const NavListTab = ({ to, replace = false, children, ...props }) => (
+const NavListTab = ({ to, replace = false, active, children, ...props }) => (
   <li {...props}>
     <NavLink to={to} replace={replace} end>
       {children}
     </NavLink>
   </li>
 )
+
+const activeStyles = ({ active, theme }) =>
+  active &&
+  css`
+    background-color: ${color('darkModeBlack', { theme })};
+    border-bottom: 1px solid ${color('darkModeBlack', { theme })};
+  `
 
 const StyledNavListTab = styled(NavListTab)`
   list-style: none;
@@ -31,10 +39,7 @@ const StyledNavListTab = styled(NavListTab)`
     color: ${color('lightMutedBlue')};
   }
 
-  & > a.active {
-    background-color: ${color('darkModeBlack')};
-    border-bottom: 1px solid ${color('darkModeBlack')};
-  }
+  ${activeStyles};
 `
 
 export default StyledNavListTab

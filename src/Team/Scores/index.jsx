@@ -1,7 +1,7 @@
 import React from 'react'
 import Text from 'components/Text'
 import CompletedMatch from './CompletedMatch'
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router'
 import TabBackground from 'components/TabBackground'
 import NoDataCard from '../NoDataCard'
 

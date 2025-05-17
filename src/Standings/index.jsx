@@ -2,7 +2,7 @@ import React from 'react'
 import Text from 'components/Text'
 import Standing from './Standing'
 import TabBackground from 'components/TabBackground'
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router'
 import NoDataCard from '../Team/NoDataCard'
 
 const Standings = ({ standings }) => {

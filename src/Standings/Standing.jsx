@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { color } from 'utils/style'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import TeamNameWithRank from 'components/TeamNameWithRank'
 import RankReason from './RankReason'
 

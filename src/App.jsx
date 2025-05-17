@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link } from 'react-router'
 import Home from './Home'
 import Division from './Division'
 import Team from './Team'
@@ -51,7 +51,7 @@ const App = () => (
               }
             />
             <Route
-              path="/division/:divisionSlug/team/:teamSlug/*"
+              path="/division/:divisionSlug/team/:teamSlug"
               element={
                 <RequireAuth>
                   <Team />
@@ -59,7 +59,7 @@ const App = () => (
               }
             />
             <Route
-              path="/division/:divisionSlug/*"
+              path="/division/:divisionSlug"
               element={
                 <RequireAuth>
                   <Division />

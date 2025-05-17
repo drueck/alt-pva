@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
 import TEAM_QUERY from './Team.query'
-import { Routes, Route, Link, useParams, useMatch } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router'
 import Schedules from './Schedules'
 import Scores from './Scores'
 import Standings from '../Standings'
@@ -41,10 +41,8 @@ const TeamNameHeading = styled(SecondaryHeading)`
 
 const Team = () => {
   const { divisionSlug, teamSlug } = useParams()
-
-  const onSchedulesTab = Boolean(useMatch({ path: '.', end: true }))
-  const onScoresTab = Boolean(useMatch({ path: 'scores', end: true }))
-  const onStandingsTab = Boolean(useMatch({ path: 'standings', end: true }))
+  const [searchParams] = useSearchParams()
+  const tab = searchParams.get('tab') || 'schedules'
 
   const { loading, error, data } = useQuery(TEAM_QUERY, {
     variables: { divisionSlug, teamSlug },
@@ -84,39 +82,28 @@ const Team = () => {
         {lossesText}.
       </Text>
       <TabNavList>
-        <NavListTab to="." replace>
+        <NavListTab to="." replace active={tab === 'schedules'}>
           Schedules
         </NavListTab>
-        <NavListTab to="scores" replace>
+        <NavListTab to="?tab=scores" replace active={tab === 'scores'}>
           Scores
         </NavListTab>
-        <NavListTab to="standings" replace>
+        <NavListTab to="?tab=standings" replace active={tab === 'standings'}>
           Standings
         </NavListTab>
       </TabNavList>
       <TabBackground>
-        <Routes>
-          <Route
-            index
-            element={
-              <Schedules
-                scheduledMatches={scheduledMatches}
-                teamId={teamId}
-                divisionSlug={divisionSlug}
-              />
-            }
+        {tab === 'scores' ? (
+          <Scores completedMatches={completedMatches} teamId={teamId} />
+        ) : tab === 'standings' ? (
+          <Standings standings={standings} />
+        ) : (
+          <Schedules
+            scheduledMatches={scheduledMatches}
+            teamId={teamId}
+            divisionSlug={divisionSlug}
           />
-          <Route
-            path="scores"
-            element={
-              <Scores completedMatches={completedMatches} teamId={teamId} />
-            }
-          />
-          <Route
-            path="standings"
-            element={<Standings standings={standings} />}
-          />
-        </Routes>
+        )}
       </TabBackground>
     </>
   )
