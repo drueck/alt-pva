@@ -1,13 +1,13 @@
 {
   "private": true,
   "engines": {
-    "node": ">=18.16.0 <22"
+    "node": ">=18.16.0"
   },
   "dependencies": {
     "@apollo/client": "^3.13.7",
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
-    "@floating-ui/react": "0.25.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@floating-ui/react": "^0.25.0",
     "graphql": "^16.10.0",
     "ordinal": "^1.0.3",
     "react": "^19.1.0",
