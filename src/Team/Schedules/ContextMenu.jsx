@@ -8,7 +8,8 @@ import {
   flip,
 } from '@floating-ui/react'
 import styled from '@emotion/styled'
-import { color, theme } from 'utils/style'
+import { useTheme } from '@emotion/react'
+import { color } from 'utils/style'
 import IconButton from 'components/IconButton'
 import MoreIcon from 'components/MoreIcon'
 import SubFinder from '../SubFinder'
@@ -37,6 +38,7 @@ const MenuItem = styled.li`
 `
 
 const ContextMenu = ({ teamId, match }) => {
+  const theme = useTheme()
   const [isOpen, setIsOpen] = useState(false)
   const [isSubFinderLoaded, setIsSubFinderLoaded] = useState(false)
   const subFinderRef = useRef(null)

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
-import { color, theme } from 'utils/style'
+import { useTheme } from '@emotion/react'
+import { color } from 'utils/style'
 import IconButton from './IconButton'
 import TrashIcon from 'components/TrashIcon'
 import FavoritesContext from './FavoritesContext'
@@ -10,6 +11,7 @@ const StyledIconButton = styled(IconButton)`
 `
 
 const RemoveFavoriteButton = ({ favorite }) => {
+  const theme = useTheme()
   const { removeFavorite } = useContext(FavoritesContext)
 
   return (

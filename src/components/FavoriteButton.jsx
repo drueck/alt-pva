@@ -1,10 +1,12 @@
 import React, { useContext } from 'react'
-import { color, theme } from 'utils/style'
+import { useTheme } from '@emotion/react'
+import { color } from 'utils/style'
 import IconButton from './IconButton'
 import StarIcon from './StarIcon'
 import FavoritesContext from './FavoritesContext'
 
 const FavoriteButton = ({ favoriteData }) => {
+  const theme = useTheme()
   const { isFavorite, addFavorite, removeFavorite } =
     useContext(FavoritesContext)
 

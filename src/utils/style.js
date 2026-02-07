@@ -27,11 +27,11 @@ export const dark = {
   },
 }
 
-export const theme = dark
+export const themes = { light, dark }
 
 export const color = curry((colorName, props) => props.theme.colors[colorName])
 
-export const globalStyles = css`
+export const globalStyles = (theme) => css`
   body {
     color: ${theme.colors.text};
     background-color: ${theme.colors.background};
