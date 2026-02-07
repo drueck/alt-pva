@@ -3,14 +3,14 @@ import { curry } from 'utils/fp'
 
 export const theme = {
   colors: {
-    lightGreen: '#90b37f',
+    lightGreen: '#a0c88e',
     mutedBlue: '#3B719f',
-    lightMutedBlue: '#578aba',
-    perrywinkle: '#8f8ce7',
-    lightPink: '#b37f88',
+    lightMutedBlue: '#72a7da',
+    perrywinkle: '#a09df0',
+    lightPink: '#c98a94',
     darkModeBackground: '#2e3544',
-    darkModeBlack: '#252a36',
-    darkModeText: '#bdc0bb',
+    darkModeBlack: '#222733',
+    darkModeText: '#d0d3ce',
   },
 }
 
