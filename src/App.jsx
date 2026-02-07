@@ -5,23 +5,41 @@ import Division from './Division'
 import Team from './Team'
 import styled from '@emotion/styled'
 import { Global } from '@emotion/react'
-import { ThemeProvider } from '@emotion/react'
+import { ThemeProvider as EmotionThemeProvider } from '@emotion/react'
 import { globalStyles, color } from 'utils/style'
 import { PrimaryHeading } from 'components/Headings'
 import MaintenanceMessage from './MaintenanceMessage'
 import Login from './Login'
 import RequireAuth from 'components/RequireAuth'
 import NotFound from 'components/NotFound'
-import usePreferredTheme from './hooks/usePreferredTheme'
+import { useThemeContext } from './components/ThemeContext'
+import LightModeButton from 'components/LightModeButton'
+import DarkModeButton from 'components/DarkModeButton'
 
 const AppHeader = styled.header`
   width: 100%;
   background-color: ${color('surface')};
-  text-align: center;
+  display: flex;
+  justify-content: center;
+`
+
+const HeaderContent = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+`
+
+const HeaderActions = styled.div`
+  display: flex;
+  gap: 10px;
+  padding-right: 5px;
 `
 
 const Main = styled.main`
-  padding: 10px 0 0 0;
+  padding: 10px 10px 0 10px;
   max-width: 1200px;
   margin: 0 auto 50px;
 `
@@ -29,16 +47,22 @@ const Main = styled.main`
 const maintenanceMode = false
 
 const App = () => {
-  const [theme, _setPreferredTheme] = usePreferredTheme()
+  const { theme } = useThemeContext()
 
   return (
-    <ThemeProvider theme={theme}>
+    <EmotionThemeProvider theme={theme}>
       <BrowserRouter>
         <Global styles={globalStyles} />
         <AppHeader>
-          <PrimaryHeading>
-            <Link to="/">alt-pva</Link>
-          </PrimaryHeading>
+          <HeaderContent>
+            <PrimaryHeading>
+              <Link to="/">alt-pva</Link>
+            </PrimaryHeading>
+            <HeaderActions>
+              <LightModeButton />
+              <DarkModeButton />
+            </HeaderActions>
+          </HeaderContent>
         </AppHeader>
         <Main>
           {maintenanceMode ? (
@@ -75,7 +99,7 @@ const App = () => {
           )}
         </Main>
       </BrowserRouter>
-    </ThemeProvider>
+    </EmotionThemeProvider>
   )
 }
 

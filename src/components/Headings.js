@@ -3,7 +3,7 @@ import { color } from 'utils/style'
 
 export const PrimaryHeading = styled.h1`
   margin: 0;
-  padding: 10px;
+  padding: 10px 5px;
 
   a {
     text-decoration: none;

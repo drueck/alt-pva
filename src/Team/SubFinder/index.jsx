@@ -7,6 +7,7 @@ import React, {
   useCallback,
 } from 'react'
 import styled from '@emotion/styled'
+import { useTheme } from '@emotion/react'
 import { color } from 'utils/style'
 import TeamList from './TeamList'
 import XIcon from 'components/XIcon'
@@ -80,6 +81,7 @@ const Heading = styled.h2`
 const SubFinder = React.memo(
   forwardRef(({ teamId, match, close: externalClose }, ref) => {
     const modalRef = useRef(null)
+    const theme = useTheme()
     const [isOpen, setIsOpen] = useState(false)
     const { loading, error, before, after } = useSubFinder(teamId, match)
 
@@ -137,7 +139,7 @@ const SubFinder = React.memo(
                   type="button"
                   onClick={closeModal}
                 >
-                  <XIcon title="Close" />
+                  <XIcon title="Close" strokeColor={theme.colors.text} />
                 </IconButton>
               </TitleContainer>
               <ContentContainer>

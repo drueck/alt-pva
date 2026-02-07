@@ -4,6 +4,7 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 import { AuthenticationProvider } from 'components/AuthenticationContext'
 import { FavoritesProvider } from 'components/FavoritesContext'
+import { ThemeProvider } from 'components/ThemeContext'
 import Apollo from 'components/Apollo'
 
 const root = createRoot(document.getElementById('root'))
@@ -11,11 +12,13 @@ const root = createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <AuthenticationProvider>
-      <FavoritesProvider>
-        <Apollo>
-          <App />
-        </Apollo>
-      </FavoritesProvider>
+      <ThemeProvider>
+        <FavoritesProvider>
+          <Apollo>
+            <App />
+          </Apollo>
+        </FavoritesProvider>
+      </ThemeProvider>
     </AuthenticationProvider>
   </React.StrictMode>,
 )
