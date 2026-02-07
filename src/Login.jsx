@@ -15,7 +15,7 @@ const CenteredContainer = styled.div`
 
 const PasswordLabel = styled.label`
   display: block;
-  color: ${color('darkModeText')};
+  color: ${color('text')};
   font-size: 1.3em;
   font-weight: bold;
   line-height: 2em;
@@ -23,10 +23,10 @@ const PasswordLabel = styled.label`
 `
 
 const PasswordInput = styled.input`
-  border: 1px solid ${color('darkModeText')};
+  border: 1px solid ${color('text')};
   border-radius: 0.3em;
-  background-color: ${color('darkModeBlack')};
-  color: ${color('darkModeText')};
+  background-color: ${color('surface')};
+  color: ${color('text')};
   font-size: 2em;
   padding: 0.5em;
   text-align: center;
@@ -34,8 +34,8 @@ const PasswordInput = styled.input`
 `
 
 const LoginButton = styled.button`
-  background-color: ${color('mutedBlue')};
-  color: ${color('darkModeText')};
+  background-color: ${color('accentMuted')};
+  color: ${color('text')};
   border-radius: 0.3em;
   border: none;
   display: block;
@@ -46,12 +46,12 @@ const LoginButton = styled.button`
 
   &:hover,
   &:focus-visible {
-    background-color: ${color('lightMutedBlue')};
+    background-color: ${color('accent')};
   }
 `
 
 const ErrorText = styled(Text)`
-  color: ${color('lightPink')};
+  color: ${color('danger')};
 `
 
 const LOGIN_REQUIRED_QUERY = gql`

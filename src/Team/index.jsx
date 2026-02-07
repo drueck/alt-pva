@@ -19,11 +19,11 @@ import FavoriteButton from 'components/FavoriteButton'
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: ${color('lightMutedBlue')};
+  color: ${color('accent')};
 `
 
 const TabNavList = styled(NavList)`
-  border-bottom: 1px solid ${color('darkModeBackground')};
+  border-bottom: 1px solid ${color('background')};
   margin-top: 1.5rem;
   margin-bottom: 0;
 `

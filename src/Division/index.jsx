@@ -14,7 +14,7 @@ import QueryError from 'components/QueryError'
 import NotFound from 'components/NotFound'
 
 const TabbedNavList = styled(NavList)`
-  border-bottom: 1px solid ${color('darkModeBackground')};
+  border-bottom: 1px solid ${color('background')};
   margin-top: 1rem;
   margin-bottom: 0;
 `

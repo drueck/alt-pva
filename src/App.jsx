@@ -15,7 +15,7 @@ import NotFound from 'components/NotFound'
 
 const AppHeader = styled.header`
   width: 100%;
-  background-color: ${color('darkModeBlack')};
+  background-color: ${color('surface')};
   text-align: center;
 `
 

@@ -6,7 +6,7 @@ import Text from 'components/Text'
 
 const PVALink = styled.a`
   text-decoration: none;
-  color: ${color('lightMutedBlue')};
+  color: ${color('accent')};
 `
 
 const MaintenanceMessage = () => (

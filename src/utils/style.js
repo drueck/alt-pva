@@ -1,25 +1,40 @@
 import { css } from '@emotion/react'
 import { curry } from 'utils/fp'
 
-export const theme = {
+export const light = {
   colors: {
-    lightGreen: '#a0c88e',
-    mutedBlue: '#3B719f',
-    lightMutedBlue: '#72a7da',
-    perrywinkle: '#a09df0',
-    lightPink: '#c98a94',
-    darkModeBackground: '#2e3544',
-    darkModeBlack: '#222733',
-    darkModeText: '#d0d3ce',
+    success: '#247140',
+    accentMuted: '#2d5a82',
+    accent: '#2b6ca3',
+    heading: '#5b58a8',
+    danger: '#a63840',
+    background: '#f0f1f3',
+    surface: '#ffffff',
+    text: '#2e3544',
   },
 }
+
+export const dark = {
+  colors: {
+    success: '#a0c88e',
+    accentMuted: '#3B719f',
+    accent: '#72a7da',
+    heading: '#a09df0',
+    danger: '#c98a94',
+    background: '#2e3544',
+    surface: '#222733',
+    text: '#d0d3ce',
+  },
+}
+
+export const theme = dark
 
 export const color = curry((colorName, props) => props.theme.colors[colorName])
 
 export const globalStyles = css`
   body {
-    color: ${theme.colors.darkModeText};
-    background-color: ${theme.colors.darkModeBackground};
+    color: ${theme.colors.text};
+    background-color: ${theme.colors.background};
     margin: 0;
     font-family: 'Roboto Mono', monospace;
   }

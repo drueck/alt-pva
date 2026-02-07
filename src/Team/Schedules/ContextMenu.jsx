@@ -18,8 +18,8 @@ const Menu = styled.ul`
   padding: 0.5rem 0;
   list-style: none;
 
-  background-color: ${color('darkModeBlack')};
-  border: 1px solid ${color('darkModeText')};
+  background-color: ${color('surface')};
+  border: 1px solid ${color('text')};
   border-radius: 4px;
 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -27,12 +27,12 @@ const Menu = styled.ul`
 
 const MenuItem = styled.li`
   padding: 0.5rem 1rem;
-  color: ${color('darkModeText')};
+  color: ${color('text')};
   text-align: left;
   cursor: pointer;
 
   &:hover {
-    color: ${color('mutedBlue')};
+    color: ${color('accentMuted')};
   }
 `
 
@@ -71,7 +71,7 @@ const ContextMenu = ({ teamId, match }) => {
         ref={refs.setReference}
         {...getReferenceProps()}
       >
-        <MoreIcon strokeColor={color('darkModeText', { theme })} />
+        <MoreIcon strokeColor={color('text', { theme })} />
       </IconButton>
       {isOpen && (
         <Menu

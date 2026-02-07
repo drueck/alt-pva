@@ -20,8 +20,8 @@ const FavoriteButton = ({ favoriteData }) => {
     >
       <StarIcon
         title={favorite ? 'Favorite' : 'Not Favorite'}
-        strokeColor={color('lightMutedBlue', { theme })}
-        fillColor={favorite ? color('lightMutedBlue', { theme }) : 'none'}
+        strokeColor={color('accent', { theme })}
+        fillColor={favorite ? color('accent', { theme }) : 'none'}
       />
     </IconButton>
   )

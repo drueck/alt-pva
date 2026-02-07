@@ -12,7 +12,7 @@ const ErrorText = styled(Text)`
 const StyledLink = styled(Link)`
   &,
   &:visited {
-    color: ${color('lightMutedBlue')};
+    color: ${color('accent')};
     text-decoration: none;
   }
 `

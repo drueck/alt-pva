@@ -4,7 +4,7 @@ import { color } from 'utils/style'
 const NavListItem = styled.li`
   list-style: none;
   margin-bottom: 0;
-  border-bottom: 1px solid ${color('darkModeBackground')};
+  border-bottom: 1px solid ${color('background')};
 
   &:last-child {
     border-bottom: none;

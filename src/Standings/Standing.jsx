@@ -12,9 +12,9 @@ const formatPointDifferential = (value) =>
   (value > 0 ? '+' : '') + Number.parseFloat(value).toFixed(2)
 
 const Container = styled.div`
-  background-color: ${color('darkModeBlack')};
+  background-color: ${color('surface')};
   padding: 20px;
-  border-bottom: 2px solid ${color('darkModeBackground')};
+  border-bottom: 2px solid ${color('background')};
 
   &:last-child {
     border-bottom: none;
@@ -31,7 +31,7 @@ const AveragePointDifferential = styled.div``
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: ${color('lightMutedBlue')};
+  color: ${color('accent')};
 `
 
 const Standing = ({ standing, divisionSlug }) => {

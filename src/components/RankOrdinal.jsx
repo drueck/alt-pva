@@ -4,9 +4,9 @@ import { color } from 'utils/style'
 import ordinal from 'ordinal'
 
 const Rank = styled.span`
-  background-color: ${color('darkModeBackground')};
+  background-color: ${color('background')};
   border-radius: 0.5em;
-  color: ${color('darkModeText')};
+  color: ${color('text')};
   display: inline-block;
   line-height: 2em;
   margin-right: 1em;

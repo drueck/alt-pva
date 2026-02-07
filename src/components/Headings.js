@@ -7,18 +7,18 @@ export const PrimaryHeading = styled.h1`
 
   a {
     text-decoration: none;
-    color: ${color('lightMutedBlue')};
+    color: ${color('accent')};
   }
 `
 
 export const SecondaryHeading = styled.h2`
-  color: ${color('perrywinkle')};
+  color: ${color('heading')};
   margin: 10px 0;
   padding-left: 20px;
 `
 
 export const TertiaryHeading = styled.h3`
-  color: ${color('perrywinkle')};
+  color: ${color('heading')};
   margin: 10px 0;
   padding-left: 20px;
 `

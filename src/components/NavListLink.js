@@ -7,7 +7,7 @@ const NavListLink = styled(Link)`
   height: 100%;
   padding: 20px;
   display: block;
-  color: ${color('lightMutedBlue')};
+  color: ${color('accent')};
 `
 
 export default NavListLink

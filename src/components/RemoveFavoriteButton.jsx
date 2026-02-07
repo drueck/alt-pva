@@ -20,7 +20,7 @@ const RemoveFavoriteButton = ({ favorite }) => {
     >
       <TrashIcon
         title="Remove Favorite"
-        strokeColor={color('lightPink', { theme })}
+        strokeColor={color('danger', { theme })}
       />
     </StyledIconButton>
   )

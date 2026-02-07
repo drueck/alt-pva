@@ -15,16 +15,16 @@ const NavListTab = ({ to, replace = false, active, children, ...props }) => (
 const activeStyles = ({ active, theme }) =>
   active &&
   css`
-    background-color: ${color('darkModeBlack', { theme })};
-    border-bottom: 1px solid ${color('darkModeBlack', { theme })};
+    background-color: ${color('surface', { theme })};
+    border-bottom: 1px solid ${color('surface', { theme })};
   `
 
 const StyledNavListTab = styled(NavListTab)`
   list-style: none;
-  background-color: #1e222c;
+  background-color: ${color('background')};
   margin-bottom: -1px;
   display: inline-block;
-  border: 1px solid ${color('darkModeBackground')};
+  border: 1px solid ${color('background')};
 
   &:nth-of-type(1) {
     border-left: none;
@@ -32,11 +32,10 @@ const StyledNavListTab = styled(NavListTab)`
 
   a {
     text-decoration: none;
-    color: black;
     height: 100%;
     padding: 20px;
     display: block;
-    color: ${color('lightMutedBlue')};
+    color: ${color('accent')};
   }
 
   ${activeStyles};

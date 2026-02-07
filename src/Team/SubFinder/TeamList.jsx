@@ -16,7 +16,7 @@ const removeExtraWhitespace = (divisionName) =>
 const simpleDivision = compose(removeDay, removeGender, removeExtraWhitespace)
 
 const SubHeading = styled.h3`
-  color: ${color('perrywinkle')};
+  color: ${color('heading')};
 `
 
 const StyledList = styled.ul`
@@ -26,7 +26,7 @@ const StyledList = styled.ul`
 
 const TeamLink = styled(Link)`
   text-decoration: none;
-  color: ${color('lightMutedBlue')};
+  color: ${color('accent')};
 `
 
 const TeamList = ({ teams, beforeOrAfter, close }) => {

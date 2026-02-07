@@ -30,9 +30,9 @@ const Container = styled.div`
       'match-results set-results';
   }
 
-  background-color: ${color('darkModeBlack')};
+  background-color: ${color('surface')};
   padding: 20px;
-  border-bottom: 2px solid ${color('darkModeBackground')};
+  border-bottom: 2px solid ${color('background')};
 
   &:last-child {
     border-bottom: none;
@@ -79,10 +79,10 @@ const SetResultContainer = styled.div`
 
 const accentColorNameForResult = (result) =>
   result === 'Win'
-    ? 'lightGreen'
+    ? 'success'
     : result === 'Loss'
-      ? 'lightPink'
-      : 'lightMutedBlue'
+      ? 'danger'
+      : 'accent'
 
 const resultStyles = ({ result, theme }) => css`
   color: ${color(accentColorNameForResult(result), { theme })};
@@ -93,7 +93,7 @@ const Result = styled.span`
   min-width: 50px;
   padding: 5px;
   text-align: center;
-  border: 1px solid ${color('darkModeText')};
+  border: 1px solid ${color('text')};
 
   ${resultStyles};
 `
@@ -119,7 +119,7 @@ const SetScores = styled.div`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: ${color('lightMutedBlue')};
+  color: ${color('accent')};
 `
 
 const matchResultFromForfeit = (forfeitedTeam, opponent) => {

@@ -26,9 +26,9 @@ const Container = styled.div`
       'checkin checkin header';
   }
 
-  background-color: ${color('darkModeBlack')};
+  background-color: ${color('surface')};
   padding: 20px;
-  border-bottom: 2px solid ${color('darkModeBackground')};
+  border-bottom: 2px solid ${color('background')};
 
   &:last-child {
     border-bottom: none;
@@ -75,12 +75,12 @@ const CheckIn = styled.div`
 
 const CheckInLink = styled.a`
   text-decoration: none;
-  color: ${color('lightGreen')};
+  color: ${color('success')};
 `
 
 const LocationLink = styled.a`
   text-decoration: none;
-  color: ${color('lightGreen')};
+  color: ${color('success')};
   display: flex;
   column-gap: 0.5rem;
   justify-content: flex-start;
@@ -97,7 +97,7 @@ const LocationName = styled.span`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: ${color('lightMutedBlue')};
+  color: ${color('accent')};
 `
 
 const ScheduledMatch = ({ match, teamId, divisionSlug, checkInUrl }) => {

@@ -25,8 +25,8 @@ const Overlay = styled.div`
 `
 
 const Modal = styled.dialog`
-  background-color: ${color('darkModeBackground')};
-  color: ${color('darkModeText')};
+  background-color: ${color('background')};
+  color: ${color('text')};
   padding: 0;
   margin: 0;
   border: none;
@@ -73,7 +73,7 @@ const ContentContainer = styled.div`
 `
 
 const Heading = styled.h2`
-  color: ${color('darkModeText')};
+  color: ${color('text')};
   margin: 0;
 `
 
